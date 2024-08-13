@@ -21,7 +21,7 @@ int protocol::extractPacket(const uint8_t* buffer, int buffer_size)
     if (checksum == 0) {
         return buffer_size;
     }
-    else{
+    else {
         // todo: check
         return -1;
     }

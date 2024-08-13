@@ -7,8 +7,8 @@ namespace bms_victron_smart_shunt {
      *
      */
     class Driver : iodrivers_base::Driver {
-        // TODO: define MAX_PACKET_SIZE
-        static const int MAX_PACKET_SIZE = 32;
+
+        static const int MAX_PACKET_SIZE = 22 * 45;
         static const int INTERNAL_BUFFER_SIZE = MAX_PACKET_SIZE * 4;
 
     public:
