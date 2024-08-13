@@ -19,7 +19,7 @@ int protocol::extractPacket(const uint8_t* buffer, int buffer_size)
         checksum = (checksum + buffer[i]) & 255; /* Take modulo 256 in account */
     }
     if (checksum == 0) {
-        return packet_start;
+        return buffer_size;
     }
     else{
         // todo: check
