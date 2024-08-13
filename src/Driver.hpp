@@ -2,7 +2,6 @@
 #define BMS_VICTRON_SMART_SHUNT_DRIVER_HPP
 
 #include <iodrivers_base/Driver.hpp>
-
 namespace bms_victron_smart_shunt {
     /**
      *
@@ -14,6 +13,9 @@ namespace bms_victron_smart_shunt {
 
     public:
         Driver();
+
+    private:
+        virtual int extractPacket(uint8_t const* buffer, size_t buffer_size) const;
     };
 }
 
