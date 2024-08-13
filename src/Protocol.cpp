@@ -14,6 +14,15 @@ int protocol::extractPacket(const uint8_t* buffer, int buffer_size)
     if (packet_start) {
         return -packet_start;
     }
-    // todo: checksum
-    return packet_start;
+    int checksum = 0;
+    for (int i = 0; i < buffer_size; i++) {
+        checksum = (checksum + buffer[i]) & 255; /* Take modulo 256 in account */
+    }
+    if (checksum == 0) {
+        return packet_start;
+    }
+    else{
+        // todo: check
+        return -1;
+    }
 }
