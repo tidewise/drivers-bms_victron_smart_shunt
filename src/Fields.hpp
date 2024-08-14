@@ -2,12 +2,15 @@
 #define BMS_VICTRON_SMART_SHUNT_FIELDS_HPP
 
 #include <base/Float.hpp>
+#include <bms_victron_smart_shunt/DCMonitorMode.hpp>
 #include <string>
 
 namespace bms_victron_smart_shunt {
     /**
      *
      */
+    // todo: how to deal with uninitialized values
+    // todo: rename SMART SHUNT FEEDBACK
     struct Fields {
         /**
          * @brief Main or channel 1 (battery) voltage
@@ -15,49 +18,49 @@ namespace bms_victron_smart_shunt {
          * Unit: mV
          *
          */
-        double voltage = base::unknown<double>();
+        int voltage;
         /**
          * @brief Auxiliary (starter) voltage
          * Label: VS
          * Unit: mV
          *
          */
-        double auxiliary_voltage = base::unknown<double>();
+        int auxiliary_voltage;
         /**
          * @brief Mid-point voltage of the battery bank
          * Label: VM
          * Unit: mV
          *
          */
-        double mid_point_voltage = base::unknown<double>();
+        int mid_point_voltage;
         /**
          * @brief Mid-point deviation of the battery bank
          * Label: DM
          * Unit: Percentage
          *
          */
-        double mid_point_deviation = base::unknown<double>();
+        int mid_point_deviation;
         /**
          * @brief Main or channel 1 battery currents
          * Label: I
          * Unit: mA
          *
          */
-        double current = base::unknown<double>();
+        int current;
         /**
          * @brief Battery temperature
          * Label: T
          * Unit: Celsius
          *
          */
-        double temperature = base::unknown<double>();
+        int temperature;
         /**
          * @brief
          * Label: P
          * Unit: W
          *
          */
-        double intantaneous_power = base::unknown<double>();
+        int intantaneous_power;
         /**
          * @brief Consumed Amp Hours
          * Label: CE
@@ -65,7 +68,7 @@ namespace bms_victron_smart_shunt {
          *
          */
         // TODO: Is it a good name?
-        double consumed_charge = base::unknown<double>();
+        int consumed_charge;
         /**
          * @brief State-of-charge
          * Label: SOC
@@ -73,16 +76,17 @@ namespace bms_victron_smart_shunt {
          *
          */
         // TODO base time
-        double state_of_charge = base::unknown<double>();
+        int state_of_charge;
         /**
          * @brief Time-to-go
          * Label: TTG
          * Unit: Minutes
          *
          */
-        double time_to_go = base::unknown<double>();
+        int time_to_go;
         /**
-         * @brief Alarm condition active
+         * @brief Alarm condition active. During normal operation, this will be “OFF”.
+         * When a buzzer alarm occurs the value will change to “ON”.
          * Label: Alarm
          *
          */
@@ -94,32 +98,35 @@ namespace bms_victron_smart_shunt {
          */
         std::string relay_state;
         /**
-         * @brief Alarm reason
+         * @brief Alarm reason. This field describes the cause of the alarm. Since
+         * multiple alarm conditions can be present at same time the values of the
+         * separate alarm conditions are added. The value total is sent in decimal
+         * notation.
          * Label: AR
          *
          */
-        std::string alarm_reason;
+        int alarm_reason;
         /**
          * @brief Depth of the deepest discharge
          * Label: H1
          * Unit: mAh
          *
          */
-        double deepest_discharge_depth = base::unknown<double>();
+        int deepest_discharge_depth;
         /**
          * @brief Depth of the last discharge
          * Label: H2
          * Unit: mAh
          *
          */
-        double last_discharge_depth = base::unknown<double>();
+        int last_discharge_depth;
         /**
          * @brief Depth of the average discharge
          * Label: H3
          * Unit: mAh
          *
          */
-        double average_discharge_depth = base::unknown<double>();
+        int average_discharge_depth;
         /**
          * @brief Number of charge cycles
          * Label: H4
@@ -138,21 +145,21 @@ namespace bms_victron_smart_shunt {
          * Unit: mAh11
          *
          */
-        double cumulative_charge_drawn = base::unknown<double>();
+        int cumulative_charge_drawn;
         /**
          * @brief Minimum main (battery) voltage
          * Label: H7
          * Unit: mV
          *
          */
-        double minimum_voltage = base::unknown<double>();
+        int minimum_voltage;
         /**
          * @brief Maximum main (battery) voltage
          * Label: H8
          * Unit: mV
          *
          */
-        double maximum_voltage = base::unknown<double>();
+        int maximum_voltage;
         /**
          * @brief Number of seconds since last full charge;
          * Label: H9
@@ -160,7 +167,7 @@ namespace bms_victron_smart_shunt {
          *
          */
         // todo base time
-        double seconds_since_last_full_charge = base::unknown<double>();
+        int seconds_since_last_full_charge;
         /**
          * @brief Number of automatic_synchronizations;
          * Label: H10
@@ -185,29 +192,30 @@ namespace bms_victron_smart_shunt {
          * Unit: mV
          *
          */
-        double minimum_auxiliary_voltage = base::unknown<double>();
+        int minimum_auxiliary_voltage;
         /**
          * @brief Maximum auxiliary (battery) voltage;
          * Label: H14
          * Unit: mV
          *
          */
-        double maximum_auxiliary_voltage = base::unknown<double>();
+        int maximum_auxiliary_voltage;
         /**
          * @brief Amount of discharged energy (BMV) / Amount of produced energy (DC
          * monitor);
          * Label: H17
          * Unit: 0.01 kWh
-         *
+         * TODO RENAME
          */
-        double h17 = base::unknown<double>();
+        int h17;
         /**
          * @brief Amount of charged energy(BMV) / Amount of consumed energy(DC monitor);
          * Label: H18
          * Unit: 0.01 kWh
+         * TODO RENAME
          *
          */
-        double h18 = base::unknown<double>();
+        int h18;
         /**
          * @brief Model Description
          * Label: BMV
@@ -227,14 +235,13 @@ namespace bms_victron_smart_shunt {
          * Label: PID
          *
          */
-        double product_id;
+        int product_id;
         /**
          * @brief DC monitor mode
          * Label: MON
          *
          */
-        // todo check type
-        std::string dc_monitor_mode;
+        DCMonitorMode dc_monitor_mode;
     };
 }
 
