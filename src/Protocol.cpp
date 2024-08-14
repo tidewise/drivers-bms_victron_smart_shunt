@@ -91,54 +91,36 @@ Fields protocol::parseFields(uint8_t const* buffer, int buffer_size)
             value = line.substr(field_delimiter_pos + 1);
             value.erase(value.size() - 1);
         }
+        int val;
+        std::stringstream(value) >> val;
         if (field == "V") {
-            double val;
-            std::stringstream(value) >> val;
             data.voltage = val;
         }
         if (field == "VS") {
-            double val;
-            std::stringstream(value) >> val;
             data.auxiliary_voltage = val;
         }
         if (field == "VM") {
-            double val;
-            std::stringstream(value) >> val;
             data.mid_point_voltage = val;
         }
         if (field == "DM") {
-            double val;
-            std::stringstream(value) >> val;
             data.mid_point_deviation = val;
         }
         if (field == "I") {
-            double val;
-            std::stringstream(value) >> val;
             data.current = val;
         }
         if (field == "T") {
-            double val;
-            std::stringstream(value) >> val;
             data.temperature = val;
         }
         if (field == "P") {
-            double val;
-            std::stringstream(value) >> val;
             data.intantaneous_power = val;
         }
         if (field == "CE") {
-            double val;
-            std::stringstream(value) >> val;
             data.consumed_charge = val;
         }
         if (field == "SOC") {
-            double val;
-            std::stringstream(value) >> val;
             data.state_of_charge = val;
         }
         if (field == "TTG") {
-            double val;
-            std::stringstream(value) >> val;
             data.time_to_go = val;
         }
         if (field == "Alarm") {
@@ -148,108 +130,66 @@ Fields protocol::parseFields(uint8_t const* buffer, int buffer_size)
             data.relay_state = value;
         }
         if (field == "AR") {
-            int val;
-            std::stringstream(value) >> val;
             data.alarm_reason = val;
         }
         if (field == "H1") {
-            double val;
-            std::stringstream(value) >> val;
             data.deepest_discharge_depth = val;
         }
         if (field == "H2") {
-            double val;
-            std::stringstream(value) >> val;
             data.last_discharge_depth = val;
         }
         if (field == "H3") {
-            double val;
-            std::stringstream(value) >> val;
             data.average_discharge_depth = val;
         }
         if (field == "H4") {
-            double val;
-            std::stringstream(value) >> val;
             data.charge_cycles_number = val;
         }
         if (field == "H5") {
-            double val;
-            std::stringstream(value) >> val;
             data.full_discharges_number = val;
         }
         if (field == "H6") {
-            double val;
-            std::stringstream(value) >> val;
             data.cumulative_charge_drawn = val;
         }
         if (field == "H7") {
-            double val;
-            std::stringstream(value) >> val;
             data.minimum_voltage = val;
         }
         if (field == "H8") {
-            double val;
-            std::stringstream(value) >> val;
             data.maximum_voltage = val;
         }
         if (field == "H9") {
-            double val;
-            std::stringstream(value) >> val;
             data.seconds_since_last_full_charge = val;
         }
         if (field == "H10") {
-            double val;
-            std::stringstream(value) >> val;
             data.automatic_synchronizations_number = val;
         }
         if (field == "H11") {
-            double val;
-            std::stringstream(value) >> val;
             data.low_voltage_alarms_number = val;
         }
         if (field == "H12") {
-            double val;
-            std::stringstream(value) >> val;
             data.high_voltage_alarms_number = val;
         }
         if (field == "H13") {
-            double val;
-            std::stringstream(value) >> val;
             data.minimum_auxiliary_voltage = val;
         }
         if (field == "H14") {
-            double val;
-            std::stringstream(value) >> val;
             data.maximum_auxiliary_voltage = val;
         }
         if (field == "H17") {
-            double val;
-            std::stringstream(value) >> val;
             data.h17 = val;
         }
         if (field == "H18") {
-            double val;
-            std::stringstream(value) >> val;
             data.h18 = val;
         }
         if (field == "BMV") {
-            double val;
-            std::stringstream(value) >> val;
             data.model_description = val;
         }
         if (field == "FWE") {
-            double val;
-            std::stringstream(value) >> val;
             data.firmware_version = val;
         }
         if (field == "PID") {
-            double val;
-            std::stringstream(value) >> val;
             data.product_id = val;
         }
         if (field == "MON") {
-            int val;
-            std::stringstream(value) >> val;
             data.dc_monitor_mode = protocol::unmarshalMode(val);
         }
     }
