@@ -30,13 +30,6 @@ namespace bms_victron_smart_shunt {
          */
         SmartShuntFeedback parseSmartShuntFeedback(uint8_t const* buffer,
             int buffer_size);
-        /**
-         * @brief Unmarshal the DC Monitor Mode
-         *
-         * @param value The mode as int
-         * @return DCMonitorMode
-         */
-        DCMonitorMode unmarshalMode(int value);
     }
 }
 

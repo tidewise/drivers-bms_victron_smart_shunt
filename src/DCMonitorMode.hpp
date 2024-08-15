@@ -3,25 +3,24 @@
 
 namespace bms_victron_smart_shunt {
     enum DCMonitorMode {
-        SolarCharger,
-        WindTurbine,
-        ShaftGenerator,
-        Alternator,
-        FuelCell,
-        WaterGenerator,
-        DCToDCCharger,
-        ACCharger,
-        GenericSource,
-        BatteryMonitor,
-        GenericLoad,
-        ElectricDrive,
-        Fridge,
-        WaterPump,
-        BilgePump,
-        DCSystem,
-        Inverter,
-        WaterHeater,
-        Unknown // Todo: should  I  keep this? using it in case of unknown code
+        SolarCharger = -9,
+        WindTurbine = -8,
+        ShaftGenerator = -7,
+        Alternator = -6,
+        FuelCell = -5,
+        WaterGenerator = -4,
+        DCToDCCharger = -3,
+        ACCharger = -2,
+        GenericSource = -1,
+        BatteryMonitor = 0,
+        GenericLoad = 1,
+        ElectricDrive = 2,
+        Fridge = 3,
+        WaterPump = 4,
+        BilgePump = 5,
+        DCSystem = 6,
+        Inverter = 7,
+        WaterHeater = 8
     };
 }
 

@@ -30,52 +30,6 @@ int protocol::extractPacket(const uint8_t* buffer, int buffer_size)
     }
 }
 
-DCMonitorMode protocol::unmarshalMode(int value)
-{
-    // todo how to deal witch error
-    switch (value) {
-        case -9:
-            return DCMonitorMode(SolarCharger);
-        case -8:
-            return DCMonitorMode(WindTurbine);
-        case -7:
-            return DCMonitorMode(ShaftGenerator);
-        case -6:
-            return DCMonitorMode(Alternator);
-        case -5:
-            return DCMonitorMode(FuelCell);
-        case -4:
-            return DCMonitorMode(WaterGenerator);
-        case -3:
-            return DCMonitorMode(DCToDCCharger);
-        case -2:
-            return DCMonitorMode(ACCharger);
-        case -1:
-            return DCMonitorMode(GenericSource);
-        case 0:
-            return DCMonitorMode(BatteryMonitor);
-        case 1:
-            return DCMonitorMode(GenericLoad);
-        case 2:
-            return DCMonitorMode(ElectricDrive);
-        case 3:
-            return DCMonitorMode(Fridge);
-        case 4:
-            return DCMonitorMode(WaterPump);
-        case 5:
-            return DCMonitorMode(BilgePump);
-        case 6:
-            return DCMonitorMode(DCSystem);
-        case 7:
-            return DCMonitorMode(Inverter);
-        case 8:
-            return DCMonitorMode(WaterHeater);
-        default:
-            // todo: throw exception?
-            return DCMonitorMode(Unknown);
-    }
-}
-
 SmartShuntFeedback protocol::parseSmartShuntFeedback(uint8_t const* buffer,
     int buffer_size)
 {
@@ -191,7 +145,12 @@ SmartShuntFeedback protocol::parseSmartShuntFeedback(uint8_t const* buffer,
             data.product_id = value;
         }
         if (field == "MON") {
-            data.dc_monitor_mode = protocol::unmarshalMode(val);
+            if (val < SolarCharger || val > WaterHeater) {
+                ostringstream msg;
+                msg << "unsupported DC Monitor Mode " << value;
+                throw invalid_argument(msg.str());
+            }
+            data.dc_monitor_mode = DCMonitorMode(val);
         }
     }
     return data;
