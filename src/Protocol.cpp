@@ -76,9 +76,10 @@ DCMonitorMode protocol::unmarshalMode(int value)
     }
 }
 
-Fields protocol::parseFields(uint8_t const* buffer, int buffer_size)
+SmartShuntFeedback protocol::parseSmartShuntFeedback(uint8_t const* buffer,
+    int buffer_size)
 {
-    Fields data;
+    SmartShuntFeedback data;
     std::string data_str(reinterpret_cast<const char*>(buffer), buffer_size);
     std::istringstream stream(data_str);
     std::string line;
@@ -121,7 +122,7 @@ Fields protocol::parseFields(uint8_t const* buffer, int buffer_size)
             data.state_of_charge = val;
         }
         if (field == "TTG") {
-            data.time_to_go = val;
+            data.time_to_go = base::Time::fromSeconds(val * 60);
         }
         if (field == "Alarm") {
             data.alarm_condition_active = value;
@@ -157,7 +158,7 @@ Fields protocol::parseFields(uint8_t const* buffer, int buffer_size)
             data.maximum_voltage = val;
         }
         if (field == "H9") {
-            data.seconds_since_last_full_charge = val;
+            data.seconds_since_last_full_charge = base::Time::fromSeconds(val);
         }
         if (field == "H10") {
             data.automatic_synchronizations_number = val;
@@ -175,19 +176,19 @@ Fields protocol::parseFields(uint8_t const* buffer, int buffer_size)
             data.maximum_auxiliary_voltage = val;
         }
         if (field == "H17") {
-            data.h17 = val;
+            data.discharged_energy = val;
         }
         if (field == "H18") {
-            data.h18 = val;
+            data.charged_energy = val;
         }
         if (field == "BMV") {
-            data.model_description = val;
+            data.model_description = value;
         }
         if (field == "FWE") {
-            data.firmware_version = val;
+            data.firmware_version = value;
         }
         if (field == "PID") {
-            data.product_id = val;
+            data.product_id = value;
         }
         if (field == "MON") {
             data.dc_monitor_mode = protocol::unmarshalMode(val);

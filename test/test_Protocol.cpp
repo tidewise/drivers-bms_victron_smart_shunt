@@ -746,22 +746,10 @@ TEST_F(ProtocolTest, it_parses_the_feedback)
         0x39,
         0x36,
         0x30,
-        0x30,
-        0x0d,
-        0x0a,
-        0x43,
-        0x68,
-        0x65,
-        0x63,
-        0x6b,
-        0x73,
-        0x75,
-        0x6d,
-        0x09,
-        0x0d};
+        0x30};
 
     // TODO: Is a buffer of this size ok?
-    auto feedback = parseFields(&buffer[0], 610);
+    auto feedback = parseSmartShuntFeedback(&buffer[0], 610);
     ASSERT_EQ(feedback.voltage, 32456);
     ASSERT_EQ(feedback.auxiliary_voltage, 14450);
     ASSERT_EQ(feedback.mid_point_voltage, 15500);
@@ -771,7 +759,7 @@ TEST_F(ProtocolTest, it_parses_the_feedback)
     ASSERT_EQ(feedback.intantaneous_power, 600);
     ASSERT_EQ(feedback.consumed_charge, 15200);
     ASSERT_EQ(feedback.state_of_charge, 85);
-    ASSERT_EQ(feedback.time_to_go, 120);
+    ASSERT_EQ(feedback.time_to_go.toSeconds(), 120 * 60);
     ASSERT_EQ(feedback.alarm_condition_active, "ON");
     ASSERT_EQ(feedback.relay_state, "ON");
     ASSERT_EQ(feedback.alarm_reason, 1);
@@ -783,19 +771,16 @@ TEST_F(ProtocolTest, it_parses_the_feedback)
     ASSERT_EQ(feedback.cumulative_charge_drawn, 35000);
     ASSERT_EQ(feedback.minimum_voltage, 11000);
     ASSERT_EQ(feedback.maximum_voltage, 16000);
-    ASSERT_EQ(feedback.seconds_since_last_full_charge, 345600);
+    ASSERT_EQ(feedback.seconds_since_last_full_charge.toSeconds(), 345600);
     ASSERT_EQ(feedback.automatic_synchronizations_number, 5);
     ASSERT_EQ(feedback.low_voltage_alarms_number, 2);
     ASSERT_EQ(feedback.high_voltage_alarms_number, 0);
     ASSERT_EQ(feedback.minimum_auxiliary_voltage, 0);
     ASSERT_EQ(feedback.maximum_auxiliary_voltage, 0);
-    ASSERT_EQ(feedback.h17, 500);
-    ASSERT_EQ(feedback.h18, 300);
-    // todo check MD
-    ASSERT_EQ(feedback.model_description, "F");
-    // todo check
-    ASSERT_EQ(feedback.firmware_version, "d");
-    // todo check
-    ASSERT_EQ(feedback.product_id, 0);
+    ASSERT_EQ(feedback.discharged_energy, 500);
+    ASSERT_EQ(feedback.charged_energy, 300);
+    ASSERT_EQ(feedback.model_description, "70x");
+    ASSERT_EQ(feedback.firmware_version, "040804");
+    ASSERT_EQ(feedback.product_id, "0x204");
     ASSERT_EQ(feedback.dc_monitor_mode, DCMonitorMode::ACCharger);
 }

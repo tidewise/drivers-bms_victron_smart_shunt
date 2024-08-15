@@ -1,7 +1,8 @@
 #ifndef BMS_VICTRON_SMART_SHUNT_PROTOCOL_HPP
 #define BMS_VICTRON_SMART_SHUNT_PROTOCOL_HPP
 
-#include <bms_victron_smart_shunt/Fields.hpp>
+#include <base/Time.hpp>
+#include <bms_victron_smart_shunt/SmartShuntFeedback.hpp>
 #include <cstdint>
 
 namespace bms_victron_smart_shunt {
@@ -22,13 +23,13 @@ namespace bms_victron_smart_shunt {
         int extractPacket(const uint8_t* buffer, int buffer_size);
 
         /**
-         * @brief Parse the smart shunt data fields
-         * TODO improve
-         * @param buffer
-         * @param buffer_size
-         * @return Fields
+         * @brief Parse the Victorn Smart Shunt feedback
+         * @param buffer The buffer
+         * @param buffer_size The buffer size
+         * @return SmartShuntFeedback
          */
-        Fields parseFields(uint8_t const* buffer, int buffer_size);
+        SmartShuntFeedback parseSmartShuntFeedback(uint8_t const* buffer,
+            int buffer_size);
         /**
          * @brief Unmarshal the DC Monitor Mode
          *
