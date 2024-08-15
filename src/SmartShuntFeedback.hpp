@@ -1,17 +1,19 @@
-#ifndef BMS_VICTRON_SMART_SHUNT_FIELDS_HPP
-#define BMS_VICTRON_SMART_SHUNT_FIELDS_HPP
+#ifndef BMS_VICTRON_SMART_SHUNT_SMARTSHUNTFEEDBACK_HPP
+#define BMS_VICTRON_SMART_SHUNT_SMARTSHUNTFEEDBACK_HPP
 
 #include <base/Float.hpp>
+#include <base/Time.hpp>
 #include <bms_victron_smart_shunt/DCMonitorMode.hpp>
 #include <string>
 
 namespace bms_victron_smart_shunt {
     /**
+     * @brief The Victron Smart Shunt Feedback. More information about the
+     * SmartShuntFeedback can be obtained inn the following webpage:
+     * https://www.victronenergy.com/upload/documents/VE.Direct-Protocol-3.33.pdf
      *
      */
-    // todo: how to deal with uninitialized values
-    // todo: rename SMART SHUNT FEEDBACK
-    struct Fields {
+    struct SmartShuntFeedback {
         /**
          * @brief Main or channel 1 (battery) voltage
          * Label: V
@@ -41,7 +43,7 @@ namespace bms_victron_smart_shunt {
          */
         int mid_point_deviation;
         /**
-         * @brief Main or channel 1 battery currents
+         * @brief Main or channel 1 battery current
          * Label: I
          * Unit: mA
          *
@@ -55,7 +57,7 @@ namespace bms_victron_smart_shunt {
          */
         int temperature;
         /**
-         * @brief
+         * @brief Instantaneous power
          * Label: P
          * Unit: W
          *
@@ -75,7 +77,6 @@ namespace bms_victron_smart_shunt {
          * Unit: Percentage
          *
          */
-        // TODO base time
         int state_of_charge;
         /**
          * @brief Time-to-go
@@ -83,7 +84,7 @@ namespace bms_victron_smart_shunt {
          * Unit: Minutes
          *
          */
-        int time_to_go;
+        base::Time time_to_go;
         /**
          * @brief Alarm condition active. During normal operation, this will be “OFF”.
          * When a buzzer alarm occurs the value will change to “ON”.
@@ -166,8 +167,7 @@ namespace bms_victron_smart_shunt {
          * Unit: Seconds
          *
          */
-        // todo base time
-        int seconds_since_last_full_charge;
+        base::Time seconds_since_last_full_charge;
         /**
          * @brief Number of automatic_synchronizations;
          * Label: H10
@@ -205,37 +205,33 @@ namespace bms_victron_smart_shunt {
          * monitor);
          * Label: H17
          * Unit: 0.01 kWh
-         * TODO RENAME
          */
-        int h17;
+        int discharged_energy;
         /**
          * @brief Amount of charged energy(BMV) / Amount of consumed energy(DC monitor);
          * Label: H18
          * Unit: 0.01 kWh
-         * TODO RENAME
          *
          */
-        int h18;
+        int charged_energy;
         /**
          * @brief Model Description
          * Label: BMV
          *
          */
-        // todo check type
         std::string model_description;
         /**
          * @brief Firmware Version
          * Label: FWE
          *
          */
-        // todo check type
         std::string firmware_version;
         /**
          * @brief Product ID
          * Label: PID
          *
          */
-        int product_id;
+        std::string product_id;
         /**
          * @brief DC monitor mode
          * Label: MON

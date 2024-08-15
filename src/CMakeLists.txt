@@ -1,14 +1,10 @@
 rock_library(bms_victron_smart_shunt
-    SOURCES Dummy.cpp
+    SOURCES
         Driver.cpp
         Protocol.cpp
-    HEADERS Dummy.hpp
+    HEADERS
         Driver.hpp
         Protocol.hpp
-        Fields.hpp
+        SmartShuntFeedback.hpp
         DCMonitorMode.hpp
     DEPS_PKGCONFIG iodrivers_base)
-
-rock_executable(bms_victron_smart_shunt_bin Main.cpp
-    DEPS bms_victron_smart_shunt)
-
