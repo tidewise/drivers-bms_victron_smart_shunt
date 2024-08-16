@@ -15,8 +15,6 @@ int Driver::extractPacket(uint8_t const* buffer, size_t buffer_size) const
 
 SmartShuntFeedback Driver::processOne()
 {
-    SmartShuntFeedback feedback;
     int packet_size = readPacket(m_read_buffer, INTERNAL_BUFFER_SIZE);
-    feedback = protocol::parseSmartShuntFeedback(m_read_buffer, packet_size);
-    return feedback;
+    return protocol::parseSmartShuntFeedback(m_read_buffer, packet_size);
 }
