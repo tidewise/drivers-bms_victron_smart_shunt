@@ -51,100 +51,100 @@ SmartShuntFeedback protocol::parseSmartShuntFeedback(uint8_t const* buffer,
         if (field == "V") {
             data.voltage = val;
         }
-        if (field == "VS") {
+        else if (field == "VS") {
             data.auxiliary_voltage = val;
         }
-        if (field == "VM") {
+        else if (field == "VM") {
             data.mid_point_voltage = val;
         }
-        if (field == "DM") {
+        else if (field == "DM") {
             data.mid_point_deviation = val;
         }
-        if (field == "I") {
+        else if (field == "I") {
             data.current = val;
         }
-        if (field == "T") {
+        else if (field == "T") {
             data.temperature = val;
         }
-        if (field == "P") {
+        else if (field == "P") {
             data.intantaneous_power = val;
         }
-        if (field == "CE") {
+        else if (field == "CE") {
             data.consumed_charge = val;
         }
-        if (field == "SOC") {
+        else if (field == "SOC") {
             data.state_of_charge = val;
         }
-        if (field == "TTG") {
+        else if (field == "TTG") {
             data.time_to_go = base::Time::fromSeconds(val * 60);
         }
-        if (field == "Alarm") {
+        else if (field == "Alarm") {
             data.alarm_condition_active = value;
         }
-        if (field == "Relay") {
+        else if (field == "Relay") {
             data.relay_state = value;
         }
-        if (field == "AR") {
+        else if (field == "AR") {
             data.alarm_reason = val;
         }
-        if (field == "H1") {
+        else if (field == "H1") {
             data.deepest_discharge_depth = val;
         }
-        if (field == "H2") {
+        else if (field == "H2") {
             data.last_discharge_depth = val;
         }
-        if (field == "H3") {
+        else if (field == "H3") {
             data.average_discharge_depth = val;
         }
-        if (field == "H4") {
+        else if (field == "H4") {
             data.charge_cycles_number = val;
         }
-        if (field == "H5") {
+        else if (field == "H5") {
             data.full_discharges_number = val;
         }
-        if (field == "H6") {
+        else if (field == "H6") {
             data.cumulative_charge_drawn = val;
         }
-        if (field == "H7") {
+        else if (field == "H7") {
             data.minimum_voltage = val;
         }
-        if (field == "H8") {
+        else if (field == "H8") {
             data.maximum_voltage = val;
         }
-        if (field == "H9") {
+        else if (field == "H9") {
             data.seconds_since_last_full_charge = base::Time::fromSeconds(val);
         }
-        if (field == "H10") {
+        else if (field == "H10") {
             data.automatic_synchronizations_number = val;
         }
-        if (field == "H11") {
+        else if (field == "H11") {
             data.low_voltage_alarms_number = val;
         }
-        if (field == "H12") {
+        else if (field == "H12") {
             data.high_voltage_alarms_number = val;
         }
-        if (field == "H13") {
+        else if (field == "H13") {
             data.minimum_auxiliary_voltage = val;
         }
-        if (field == "H14") {
+        else if (field == "H14") {
             data.maximum_auxiliary_voltage = val;
         }
-        if (field == "H17") {
+        else if (field == "H17") {
             data.discharged_energy = val;
         }
-        if (field == "H18") {
+        else if (field == "H18") {
             data.charged_energy = val;
         }
-        if (field == "BMV") {
+        else if (field == "BMV") {
             data.model_description = value;
         }
-        if (field == "FWE") {
+        else if (field == "FWE") {
             data.firmware_version = value;
         }
-        if (field == "PID") {
+        else if (field == "PID") {
             data.product_id = value;
         }
-        if (field == "MON") {
+        else if (field == "MON") {
             if (val < SolarCharger || val > WaterHeater) {
                 ostringstream msg;
                 msg << "unsupported DC Monitor Mode " << value;
