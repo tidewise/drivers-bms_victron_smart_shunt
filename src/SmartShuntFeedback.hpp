@@ -2,6 +2,7 @@
 #define BMS_VICTRON_SMART_SHUNT_SMARTSHUNTFEEDBACK_HPP
 
 #include <base/Float.hpp>
+#include <base/Temperature.hpp>
 #include <base/Time.hpp>
 #include <bms_victron_smart_shunt/DCMonitorMode.hpp>
 #include <string>
@@ -17,24 +18,24 @@ namespace bms_victron_smart_shunt {
         /**
          * @brief Main or channel 1 (battery) voltage
          * Label: V
-         * Unit: mV
+         * Unit: V
          *
          */
-        int voltage;
+        float voltage;
         /**
          * @brief Auxiliary (starter) voltage
          * Label: VS
-         * Unit: mV
+         * Unit: V
          *
          */
-        int auxiliary_voltage;
+        float auxiliary_voltage;
         /**
          * @brief Mid-point voltage of the battery bank
          * Label: VM
-         * Unit: mV
+         * Unit: V
          *
          */
-        int mid_point_voltage;
+        float mid_point_voltage;
         /**
          * @brief Mid-point deviation of the battery bank
          * Label: DM
@@ -45,17 +46,16 @@ namespace bms_victron_smart_shunt {
         /**
          * @brief Main or channel 1 battery current
          * Label: I
-         * Unit: mA
+         * Unit: A
          *
          */
-        int current;
+        float current;
         /**
          * @brief Battery temperature
          * Label: T
-         * Unit: Celsius
          *
          */
-        int temperature;
+        base::Temperature temperature;
         /**
          * @brief Instantaneous power
          * Label: P
@@ -66,11 +66,10 @@ namespace bms_victron_smart_shunt {
         /**
          * @brief Consumed Amp Hours
          * Label: CE
-         * Unit: mAh
+         * Unit: Ah
          *
          */
-        // TODO: Is it a good name?
-        int consumed_charge;
+        float consumed_charge;
         /**
          * @brief State-of-charge
          * Label: SOC
@@ -81,7 +80,6 @@ namespace bms_victron_smart_shunt {
         /**
          * @brief Time-to-go
          * Label: TTG
-         * Unit: Minutes
          *
          */
         base::Time time_to_go;
@@ -110,24 +108,24 @@ namespace bms_victron_smart_shunt {
         /**
          * @brief Depth of the deepest discharge
          * Label: H1
-         * Unit: mAh
+         * Unit: Ah
          *
          */
-        int deepest_discharge_depth;
+        float deepest_discharge_depth;
         /**
          * @brief Depth of the last discharge
          * Label: H2
-         * Unit: mAh
+         * Unit: Ah
          *
          */
-        int last_discharge_depth;
+        float last_discharge_depth;
         /**
          * @brief Depth of the average discharge
          * Label: H3
-         * Unit: mAh
+         * Unit: Ah
          *
          */
-        int average_discharge_depth;
+        float average_discharge_depth;
         /**
          * @brief Number of charge cycles
          * Label: H4
@@ -143,28 +141,27 @@ namespace bms_victron_smart_shunt {
         /**
          * @brief Cumulative Amp Hours drawn
          * Label: H6
-         * Unit: mAh11
+         * Unit: Ah
          *
          */
-        int cumulative_charge_drawn;
+        float cumulative_charge_drawn;
         /**
          * @brief Minimum main (battery) voltage
          * Label: H7
-         * Unit: mV
+         * Unit: V
          *
          */
-        int minimum_voltage;
+        float minimum_voltage;
         /**
          * @brief Maximum main (battery) voltage
          * Label: H8
-         * Unit: mV
+         * Unit: V
          *
          */
-        int maximum_voltage;
+        float maximum_voltage;
         /**
          * @brief Number of seconds since last full charge;
          * Label: H9
-         * Unit: Seconds
          *
          */
         base::Time seconds_since_last_full_charge;
@@ -189,29 +186,30 @@ namespace bms_victron_smart_shunt {
         /**
          * @brief Minimum auxiliary (battery) voltage;
          * Label: H13
-         * Unit: mV
+         * Unit: V
          *
          */
-        int minimum_auxiliary_voltage;
+        float minimum_auxiliary_voltage;
         /**
          * @brief Maximum auxiliary (battery) voltage;
          * Label: H14
-         * Unit: mV
+         * Unit: V
          *
          */
-        int maximum_auxiliary_voltage;
+        float maximum_auxiliary_voltage;
         /**
          * @brief Amount of discharged energy (BMV) / Amount of produced energy (DC
          * monitor);
          * Label: H17
-         * Unit: 0.01 kWh
+         * Original device unit: 0.01 kWh
+         * Unit: Wh
          */
         int discharged_energy;
         /**
          * @brief Amount of charged energy(BMV) / Amount of consumed energy(DC monitor);
          * Label: H18
-         * Unit: 0.01 kWh
-         *
+         * Original device unit: 0.01 kWh
+         * Unit: Wh
          */
         int charged_energy;
         /**

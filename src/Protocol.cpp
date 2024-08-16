@@ -49,28 +49,28 @@ SmartShuntFeedback protocol::parseSmartShuntFeedback(uint8_t const* buffer,
         int val;
         std::stringstream(value) >> val;
         if (field == "V") {
-            data.voltage = val;
-        }
-        else if (field == "VS") {
-            data.auxiliary_voltage = val;
+            data.voltage = static_cast<float>(val) / 1000;
         }
         else if (field == "VM") {
-            data.mid_point_voltage = val;
+            data.mid_point_voltage = static_cast<float>(val) / 1000;
+        }
+        else if (field == "VS") {
+            data.auxiliary_voltage = static_cast<float>(val) / 1000;
         }
         else if (field == "DM") {
             data.mid_point_deviation = val;
         }
         else if (field == "I") {
-            data.current = val;
+            data.current = static_cast<float>(val) / 1000;
         }
         else if (field == "T") {
-            data.temperature = val;
+            data.temperature = base::Temperature::fromCelsius(val);
         }
         else if (field == "P") {
             data.intantaneous_power = val;
         }
         else if (field == "CE") {
-            data.consumed_charge = val;
+            data.consumed_charge = static_cast<float>(val) / 1000;
         }
         else if (field == "SOC") {
             data.state_of_charge = val;
@@ -88,13 +88,13 @@ SmartShuntFeedback protocol::parseSmartShuntFeedback(uint8_t const* buffer,
             data.alarm_reason = val;
         }
         else if (field == "H1") {
-            data.deepest_discharge_depth = val;
+            data.deepest_discharge_depth = static_cast<float>(val) / 1000;
         }
         else if (field == "H2") {
-            data.last_discharge_depth = val;
+            data.last_discharge_depth = static_cast<float>(val) / 1000;
         }
         else if (field == "H3") {
-            data.average_discharge_depth = val;
+            data.average_discharge_depth = static_cast<float>(val) / 1000;
         }
         else if (field == "H4") {
             data.charge_cycles_number = val;
@@ -103,13 +103,13 @@ SmartShuntFeedback protocol::parseSmartShuntFeedback(uint8_t const* buffer,
             data.full_discharges_number = val;
         }
         else if (field == "H6") {
-            data.cumulative_charge_drawn = val;
+            data.cumulative_charge_drawn = static_cast<float>(val) / 1000;
         }
         else if (field == "H7") {
-            data.minimum_voltage = val;
+            data.minimum_voltage = static_cast<float>(val) / 1000;
         }
         else if (field == "H8") {
-            data.maximum_voltage = val;
+            data.maximum_voltage = static_cast<float>(val) / 1000;
         }
         else if (field == "H9") {
             data.seconds_since_last_full_charge = base::Time::fromSeconds(val);
@@ -124,16 +124,16 @@ SmartShuntFeedback protocol::parseSmartShuntFeedback(uint8_t const* buffer,
             data.high_voltage_alarms_number = val;
         }
         else if (field == "H13") {
-            data.minimum_auxiliary_voltage = val;
+            data.minimum_auxiliary_voltage = static_cast<float>(val) / 1000;
         }
         else if (field == "H14") {
-            data.maximum_auxiliary_voltage = val;
+            data.maximum_auxiliary_voltage = static_cast<float>(val) / 1000;
         }
         else if (field == "H17") {
-            data.discharged_energy = val;
+            data.discharged_energy = val * 10;
         }
         else if (field == "H18") {
-            data.charged_energy = val;
+            data.charged_energy = val * 10;
         }
         else if (field == "BMV") {
             data.model_description = value;

@@ -37,7 +37,7 @@ TEST_F(DriverTest, bla)
     pushDataToDriver(msg);
     auto feedback = driver.processOne();
     ASSERT_EQ(feedback.product_id, "0x203");
-    ASSERT_EQ(feedback.voltage, 26201);
+    ASSERT_NEAR(feedback.voltage, 26.201, 1e-3);
     ASSERT_EQ(feedback.current, 0);
     ASSERT_EQ(feedback.intantaneous_power, 0);
     ASSERT_EQ(feedback.consumed_charge, 0);
