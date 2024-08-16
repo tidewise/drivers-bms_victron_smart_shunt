@@ -11,6 +11,7 @@ namespace bms_victron_smart_shunt {
         static const uint8_t PACKET_START_MARKER = 0x0d;
         static const uint8_t LINE_DELIMITER = 0x0a;
         static const uint8_t FIELD_DELIMITER = 0x09;
+        static const char* CHECKSUM_STR __attribute__((unused)) = "Checksum";
 
         // Minimum number of bytes per packet
         // TODO: check

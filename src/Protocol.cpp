@@ -1,4 +1,6 @@
+#include <algorithm>
 #include <bms_victron_smart_shunt/Protocol.hpp>
+#include <cstring>
 #include <sstream>
 #include <string>
 
@@ -17,8 +19,18 @@ int protocol::extractPacket(const uint8_t* buffer, int buffer_size)
     if (packet_start) {
         return -packet_start;
     }
+    std::vector<uint8_t> checksum_vector(CHECKSUM_STR,
+        CHECKSUM_STR + std::strlen(CHECKSUM_STR));
+    auto checksum_begin_it = std::search(buffer,
+        buffer + buffer_size,
+        checksum_vector.begin(),
+        checksum_vector.end());
+    if (checksum_begin_it == buffer + buffer_size) {
+        return -1; // todo: return buffer_size or -1?
+    }
+    int packet_size = checksum_begin_it - buffer + checksum_vector.size() + 2;
     int checksum = 0;
-    for (int i = 0; i < buffer_size; i++) {
+    for (int i = 0; i < packet_size; i++) {
         checksum = (checksum + buffer[i]) & 255; /* Take modulo 256 in account */
     }
     if (checksum == 0) {
