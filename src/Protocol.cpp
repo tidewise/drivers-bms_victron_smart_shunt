@@ -85,7 +85,7 @@ SmartShuntFeedback protocol::parseSmartShuntFeedback(uint8_t const* buffer,
             data.instantaneous_power = val;
         }
         else if (field == "CE") {
-            data.consumed_charge = static_cast<float>(val) / 1000;
+            data.consumed_charge = static_cast<float>(val) * 3.6;
         }
         else if (field == "SOC") {
             data.state_of_charge = val;
@@ -103,13 +103,13 @@ SmartShuntFeedback protocol::parseSmartShuntFeedback(uint8_t const* buffer,
             data.alarm_reason = Alarms(val);
         }
         else if (field == "H1") {
-            data.deepest_discharge_depth = static_cast<float>(val) / 1000;
+            data.deepest_discharge_depth = static_cast<float>(val) * 3.6;
         }
         else if (field == "H2") {
-            data.last_discharge_depth = static_cast<float>(val) / 1000;
+            data.last_discharge_depth = static_cast<float>(val) * 3.6;
         }
         else if (field == "H3") {
-            data.average_discharge_depth = static_cast<float>(val) / 1000;
+            data.average_discharge_depth = static_cast<float>(val) * 3.6;
         }
         else if (field == "H4") {
             data.charge_cycles_number = val;
@@ -118,7 +118,7 @@ SmartShuntFeedback protocol::parseSmartShuntFeedback(uint8_t const* buffer,
             data.full_discharges_number = val;
         }
         else if (field == "H6") {
-            data.cumulative_charge_drawn = static_cast<float>(val) / 1000;
+            data.cumulative_charge_drawn = static_cast<float>(val) * 3.6;
         }
         else if (field == "H7") {
             data.minimum_voltage = static_cast<float>(val) / 1000;
@@ -145,10 +145,10 @@ SmartShuntFeedback protocol::parseSmartShuntFeedback(uint8_t const* buffer,
             data.maximum_auxiliary_voltage = static_cast<float>(val) / 1000;
         }
         else if (field == "H17") {
-            data.discharged_energy = val * 10;
+            data.discharged_energy = val * 36000;
         }
         else if (field == "H18") {
-            data.charged_energy = val * 10;
+            data.charged_energy = val * 36000;
         }
         else if (field == "BMV") {
             data.model_description = value;

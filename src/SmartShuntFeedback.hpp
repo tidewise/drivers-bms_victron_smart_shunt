@@ -58,16 +58,16 @@ namespace bms_victron_smart_shunt {
          */
         base::Temperature temperature;
         /**
-         * @brief Instantaneous power ( check)
+         * @brief Instantaneous power
          * Label: P
          * Unit: W
          *
          */
         float instantaneous_power = base::unset<double>();
         /**
-         * @brief Consumed Amp Hours
+         * @brief Consumed charge
          * Label: CE
-         * Unit: Ah
+         * Unit: Coulomb
          *
          */
         float consumed_charge = base::unset<double>();
@@ -109,21 +109,21 @@ namespace bms_victron_smart_shunt {
         /**
          * @brief Depth of the deepest discharge
          * Label: H1
-         * Unit: Ah
+         * Unit: Coulomb
          *
          */
         float deepest_discharge_depth = base::unset<double>();
         /**
          * @brief Depth of the last discharge
          * Label: H2
-         * Unit: Ah
+         * Unit: Coulomb
          *
          */
         float last_discharge_depth = base::unset<double>();
         /**
          * @brief Depth of the average discharge
          * Label: H3
-         * Unit: Ah
+         * Unit: Coulomb
          *
          */
         float average_discharge_depth = base::unset<double>();
@@ -140,9 +140,9 @@ namespace bms_victron_smart_shunt {
          */
         int full_discharges_number = 0;
         /**
-         * @brief Cumulative Amp Hours drawn
+         * @brief Cumulative charge drawn
          * Label: H6
-         * Unit: Ah
+         * Unit: Coulomb
          *
          */
         float cumulative_charge_drawn = base::unset<double>();
@@ -203,14 +203,14 @@ namespace bms_victron_smart_shunt {
          * monitor);
          * Label: H17
          * Original device unit: 0.01 kWh
-         * Unit: Wh
+         * Unit: Joule
          */
         float discharged_energy = base::unset<double>();
         /**
          * @brief Amount of charged energy(BMV) / Amount of consumed energy(DC monitor);
          * Label: H18
          * Original device unit: 0.01 kWh
-         * Unit: Wh
+         * Unit: Joule
          */
         float charged_energy = base::unset<double>();
         /**
