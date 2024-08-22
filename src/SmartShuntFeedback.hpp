@@ -22,21 +22,21 @@ namespace bms_victron_smart_shunt {
          * Unit: V
          *
          */
-        float voltage;
+        float voltage = base::unset<double>();
         /**
          * @brief Auxiliary (starter) voltage
          * Label: VS
          * Unit: V
          *
          */
-        float auxiliary_voltage;
+        float auxiliary_voltage = base::unset<double>();
         /**
          * @brief Mid-point voltage of the battery bank
          * Label: VM
          * Unit: V
          *
          */
-        float mid_point_voltage;
+        float mid_point_voltage = base::unset<double>();
         /**
          * @brief Mid-point deviation of the battery bank
          * Label: DM
@@ -50,7 +50,7 @@ namespace bms_victron_smart_shunt {
          * Unit: A
          *
          */
-        float current;
+        float current = base::unset<double>();
         /**
          * @brief Battery temperature
          * Label: T
@@ -58,19 +58,19 @@ namespace bms_victron_smart_shunt {
          */
         base::Temperature temperature;
         /**
-         * @brief Instantaneous power
+         * @brief Instantaneous power ( check)
          * Label: P
          * Unit: W
          *
          */
-        int intantaneous_power;
+        int instantaneous_power;
         /**
          * @brief Consumed Amp Hours
          * Label: CE
          * Unit: Ah
          *
          */
-        float consumed_charge;
+        float consumed_charge = base::unset<double>();
         /**
          * @brief State-of-charge
          * Label: SOC
@@ -112,21 +112,21 @@ namespace bms_victron_smart_shunt {
          * Unit: Ah
          *
          */
-        float deepest_discharge_depth;
+        float deepest_discharge_depth = base::unset<double>();
         /**
          * @brief Depth of the last discharge
          * Label: H2
          * Unit: Ah
          *
          */
-        float last_discharge_depth;
+        float last_discharge_depth = base::unset<double>();
         /**
          * @brief Depth of the average discharge
          * Label: H3
          * Unit: Ah
          *
          */
-        float average_discharge_depth;
+        float average_discharge_depth = base::unset<double>();
         /**
          * @brief Number of charge cycles
          * Label: H4
@@ -145,21 +145,21 @@ namespace bms_victron_smart_shunt {
          * Unit: Ah
          *
          */
-        float cumulative_charge_drawn;
+        float cumulative_charge_drawn = base::unset<double>();
         /**
          * @brief Minimum main (battery) voltage
          * Label: H7
          * Unit: V
          *
          */
-        float minimum_voltage;
+        float minimum_voltage = base::unset<double>();
         /**
          * @brief Maximum main (battery) voltage
          * Label: H8
          * Unit: V
          *
          */
-        float maximum_voltage;
+        float maximum_voltage = base::unset<double>();
         /**
          * @brief Number of seconds since last full charge;
          * Label: H9
@@ -190,14 +190,14 @@ namespace bms_victron_smart_shunt {
          * Unit: V
          *
          */
-        float minimum_auxiliary_voltage;
+        float minimum_auxiliary_voltage = base::unset<double>();
         /**
          * @brief Maximum auxiliary (battery) voltage;
          * Label: H14
          * Unit: V
          *
          */
-        float maximum_auxiliary_voltage;
+        float maximum_auxiliary_voltage = base::unset<double>();
         /**
          * @brief Amount of discharged energy (BMV) / Amount of produced energy (DC
          * monitor);

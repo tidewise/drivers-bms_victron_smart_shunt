@@ -4,7 +4,7 @@
 namespace bms_victron_smart_shunt {
     /**
      * @brief The alarm reasons
-     * 
+     *
      * Since multiple alarm conditions can be present at the same time the values of the
      * separate alarm conditions are added. The value total is sent in decimal notation.
      *
