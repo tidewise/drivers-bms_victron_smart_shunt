@@ -2,6 +2,10 @@
 #define BMS_VICTRON_SMART_SHUNT_DCMONITORMODE_HPP
 
 namespace bms_victron_smart_shunt {
+    /**
+     * @brief The DC monitor modes
+     *
+     */
     enum DCMonitorMode {
         SolarCharger = -9,
         WindTurbine = -8,

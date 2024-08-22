@@ -45,12 +45,12 @@ TEST_F(ProtocolTest, it_accepts_a_packet_and_correctly_parse_it)
     ASSERT_NEAR(feedback.voltage, 32.456, 1e-3);
     ASSERT_NEAR(feedback.auxiliary_voltage, 14.45, 1e-3);
     ASSERT_NEAR(feedback.mid_point_voltage, 15.5, 1e-3);
-    ASSERT_EQ(feedback.mid_point_deviation, 5);
+    ASSERT_NEAR(feedback.mid_point_deviation, 5, 1e-3);
     ASSERT_NEAR(feedback.current, 4.5, 1e-3);
     ASSERT_NEAR(feedback.temperature.getCelsius(), 27, 1e-3);
-    ASSERT_EQ(feedback.instantaneous_power, 600);
+    ASSERT_NEAR(feedback.instantaneous_power, 600, 1e-3);
     ASSERT_NEAR(feedback.consumed_charge, 15.200, 1e-3);
-    ASSERT_EQ(feedback.state_of_charge, 85);
+    ASSERT_NEAR(feedback.state_of_charge, 85, 1e-3);
     ASSERT_EQ(feedback.time_to_go.toSeconds(), 120 * 60);
     ASSERT_EQ(feedback.alarm_condition_active, "ON");
     ASSERT_EQ(feedback.relay_state, "ON");
@@ -69,8 +69,8 @@ TEST_F(ProtocolTest, it_accepts_a_packet_and_correctly_parse_it)
     ASSERT_EQ(feedback.high_voltage_alarms_number, 35);
     ASSERT_NEAR(feedback.minimum_auxiliary_voltage, 0.045, 1e-3);
     ASSERT_NEAR(feedback.maximum_auxiliary_voltage, 0.055, 1e-3);
-    ASSERT_EQ(feedback.discharged_energy, 5000);
-    ASSERT_EQ(feedback.charged_energy, 30000);
+    ASSERT_NEAR(feedback.discharged_energy, 5000, 1e-3);
+    ASSERT_NEAR(feedback.charged_energy, 30000, 1e-3);
     ASSERT_EQ(feedback.model_description, "700");
     ASSERT_EQ(feedback.firmware_version, "040804");
     ASSERT_EQ(feedback.product_id, "0x204");

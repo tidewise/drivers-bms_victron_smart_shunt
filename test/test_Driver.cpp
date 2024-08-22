@@ -52,9 +52,9 @@ TEST_F(DriverTest, it_accepts_a_full_packet)
     ASSERT_EQ(feedback.product_id, "0x203");
     ASSERT_NEAR(feedback.voltage, 26.201, 1e-3);
     ASSERT_EQ(feedback.current, 0);
-    ASSERT_EQ(feedback.instantaneous_power, 0);
+    ASSERT_NEAR(feedback.instantaneous_power, 0, 1e-3);
     ASSERT_EQ(feedback.consumed_charge, 0);
-    ASSERT_EQ(feedback.state_of_charge, 1000);
+    ASSERT_NEAR(feedback.state_of_charge, 1000, 1e-3);
     ASSERT_EQ(feedback.time_to_go.toSeconds(), -60);
     ASSERT_EQ(feedback.alarm_condition_active, "OFF");
     ASSERT_EQ(feedback.relay_state, "OFF");
@@ -102,9 +102,9 @@ TEST_F(DriverTest, the_packet_arrives_little_by_little)
     ASSERT_EQ(feedback.product_id, "0x203");
     ASSERT_NEAR(feedback.voltage, 26.201, 1e-3);
     ASSERT_EQ(feedback.current, 0);
-    ASSERT_EQ(feedback.instantaneous_power, 0);
+    ASSERT_NEAR(feedback.instantaneous_power, 0, 1e-3);
     ASSERT_EQ(feedback.consumed_charge, 0);
-    ASSERT_EQ(feedback.state_of_charge, 1000);
+    ASSERT_NEAR(feedback.state_of_charge, 1000, 1e-3);
     ASSERT_EQ(feedback.time_to_go.toSeconds(), -60);
     ASSERT_EQ(feedback.alarm_condition_active, "OFF");
     ASSERT_EQ(feedback.relay_state, "OFF");
@@ -131,9 +131,9 @@ TEST_F(DriverTest, it_accepts_a_packet_with_garbage_at_the_beginning)
     ASSERT_EQ(feedback.product_id, "0x203");
     ASSERT_NEAR(feedback.voltage, 26.201, 1e-3);
     ASSERT_EQ(feedback.current, 0);
-    ASSERT_EQ(feedback.instantaneous_power, 0);
+    ASSERT_NEAR(feedback.instantaneous_power, 0, 1e-3);
     ASSERT_EQ(feedback.consumed_charge, 0);
-    ASSERT_EQ(feedback.state_of_charge, 1000);
+    ASSERT_NEAR(feedback.state_of_charge, 1000, 1e-3);
     ASSERT_EQ(feedback.time_to_go.toSeconds(), -60);
     ASSERT_EQ(feedback.alarm_condition_active, "OFF");
     ASSERT_EQ(feedback.relay_state, "OFF");
@@ -169,9 +169,9 @@ TEST_F(DriverTest, rejects_a_partial_packet_and_accepts_following_full_one)
     ASSERT_EQ(feedback.product_id, "0x203");
     ASSERT_NEAR(feedback.voltage, 26.201, 1e-3);
     ASSERT_EQ(feedback.current, 0);
-    ASSERT_EQ(feedback.instantaneous_power, 0);
+    ASSERT_NEAR(feedback.instantaneous_power, 0, 1e-3);
     ASSERT_EQ(feedback.consumed_charge, 0);
-    ASSERT_EQ(feedback.state_of_charge, 1000);
+    ASSERT_NEAR(feedback.state_of_charge, 1000, 1e-3);
     ASSERT_EQ(feedback.time_to_go.toSeconds(), -60);
     ASSERT_EQ(feedback.alarm_condition_active, "OFF");
     ASSERT_EQ(feedback.relay_state, "OFF");

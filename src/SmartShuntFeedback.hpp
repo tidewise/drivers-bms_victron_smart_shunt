@@ -43,7 +43,7 @@ namespace bms_victron_smart_shunt {
          * Unit: Percentage
          *
          */
-        int mid_point_deviation;
+        float mid_point_deviation = base::unset<double>();
         /**
          * @brief Main or channel 1 battery current
          * Label: I
@@ -63,7 +63,7 @@ namespace bms_victron_smart_shunt {
          * Unit: W
          *
          */
-        int instantaneous_power;
+        float instantaneous_power = base::unset<double>();
         /**
          * @brief Consumed Amp Hours
          * Label: CE
@@ -77,7 +77,7 @@ namespace bms_victron_smart_shunt {
          * Unit: Percentage
          *
          */
-        int state_of_charge;
+        float state_of_charge = base::unset<double>();
         /**
          * @brief Time-to-go
          * Label: TTG
@@ -132,13 +132,13 @@ namespace bms_victron_smart_shunt {
          * Label: H4
          *
          */
-        int charge_cycles_number;
+        int charge_cycles_number = 0;
         /**
          * @brief Number of full discharges
          * Label: H5
          *
          */
-        int full_discharges_number;
+        int full_discharges_number = 0;
         /**
          * @brief Cumulative Amp Hours drawn
          * Label: H6
@@ -171,19 +171,19 @@ namespace bms_victron_smart_shunt {
          * Label: H10
          *
          */
-        int automatic_synchronizations_number;
+        int automatic_synchronizations_number = 0;
         /**
          * @brief Number of low main voltage alarms;
          * Label: H11
          *
          */
-        int low_voltage_alarms_number;
+        int low_voltage_alarms_number = 0;
         /**
          * @brief Number of high main voltage alarms;
          * Label: H12
          *
          */
-        int high_voltage_alarms_number;
+        int high_voltage_alarms_number = 0;
         /**
          * @brief Minimum auxiliary (battery) voltage;
          * Label: H13
@@ -205,14 +205,14 @@ namespace bms_victron_smart_shunt {
          * Original device unit: 0.01 kWh
          * Unit: Wh
          */
-        int discharged_energy;
+        float discharged_energy = base::unset<double>();
         /**
          * @brief Amount of charged energy(BMV) / Amount of consumed energy(DC monitor);
          * Label: H18
          * Original device unit: 0.01 kWh
          * Unit: Wh
          */
-        int charged_energy;
+        float charged_energy = base::unset<double>();
         /**
          * @brief Model Description
          * Label: BMV
