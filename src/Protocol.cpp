@@ -23,18 +23,21 @@ int protocol::extractPacket(const uint8_t* buffer, int buffer_size)
         CHECKSUM_STR + std::strlen(CHECKSUM_STR));
     auto checksum_begin_it = std::search(buffer,
         buffer + buffer_size,
-        checksum_vector.begin(),
-        checksum_vector.end());
+        CHECKSUM_STR,
+        CHECKSUM_STR + CHECKSUM_STR_LEN);
     if (checksum_begin_it == buffer + buffer_size) {
-        return -1; // todo: return buffer_size or -1?
+        // There is still no checksum, wait for more bytes
+        return 0;
     }
-    int packet_size = checksum_begin_it - buffer + checksum_vector.size() + 2;
+    int packet_size = checksum_begin_it - buffer + checksum_vector.size() + 1;
     int checksum = 0;
     for (int i = 0; i < packet_size; i++) {
-        checksum = (checksum + buffer[i]) & 255; /* Take modulo 256 in account */
+        // Take modulo 256 in account
+        checksum = (checksum + buffer[i]) & 255;
     }
     if (checksum == 0) {
-        return buffer_size;
+        // Returns the packet size without the checksum field
+        return checksum_begin_it - buffer - 2;
     }
     else {
         // todo: check
@@ -79,7 +82,7 @@ SmartShuntFeedback protocol::parseSmartShuntFeedback(uint8_t const* buffer,
             data.temperature = base::Temperature::fromCelsius(val);
         }
         else if (field == "P") {
-            data.intantaneous_power = val;
+            data.instantaneous_power = val;
         }
         else if (field == "CE") {
             data.consumed_charge = static_cast<float>(val) / 1000;
@@ -97,7 +100,7 @@ SmartShuntFeedback protocol::parseSmartShuntFeedback(uint8_t const* buffer,
             data.relay_state = value;
         }
         else if (field == "AR") {
-            data.alarm_reason = val;
+            data.alarm_reason = Alarms(LowStateOfCharge);
         }
         else if (field == "H1") {
             data.deepest_discharge_depth = static_cast<float>(val) / 1000;
