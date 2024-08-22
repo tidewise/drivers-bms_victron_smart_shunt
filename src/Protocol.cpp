@@ -100,7 +100,7 @@ SmartShuntFeedback protocol::parseSmartShuntFeedback(uint8_t const* buffer,
             data.relay_state = value;
         }
         else if (field == "AR") {
-            data.alarm_reason = Alarms(LowStateOfCharge);
+            data.alarm_reason = Alarms(val);
         }
         else if (field == "H1") {
             data.deepest_discharge_depth = static_cast<float>(val) / 1000;
