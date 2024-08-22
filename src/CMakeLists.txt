@@ -7,4 +7,5 @@ rock_library(bms_victron_smart_shunt
         Protocol.hpp
         SmartShuntFeedback.hpp
         DCMonitorMode.hpp
+        Alarms.hpp
     DEPS_PKGCONFIG iodrivers_base)

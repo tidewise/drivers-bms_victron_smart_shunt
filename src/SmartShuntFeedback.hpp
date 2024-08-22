@@ -4,6 +4,7 @@
 #include <base/Float.hpp>
 #include <base/Temperature.hpp>
 #include <base/Time.hpp>
+#include <bms_victron_smart_shunt/Alarms.hpp>
 #include <bms_victron_smart_shunt/DCMonitorMode.hpp>
 #include <string>
 
@@ -104,7 +105,7 @@ namespace bms_victron_smart_shunt {
          * Label: AR
          *
          */
-        int alarm_reason;
+        bms_victron_smart_shunt::Alarms alarm_reason;
         /**
          * @brief Depth of the deepest discharge
          * Label: H1
