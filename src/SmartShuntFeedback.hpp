@@ -237,6 +237,11 @@ namespace bms_victron_smart_shunt {
          *
          */
         DCMonitorMode dc_monitor_mode;
+        /**
+         * @brief The Feedback timestamp
+         *
+         */
+        base::Time timestamp;
     };
 }
 
