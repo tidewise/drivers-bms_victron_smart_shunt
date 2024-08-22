@@ -15,7 +15,7 @@ namespace bms_victron_smart_shunt {
         SmartShuntFeedback processOne();
 
     private:
-        virtual int extractPacket(uint8_t const* buffer, size_t buffer_size) const;
+        virtual int extractPacket(uint8_t const* buffer, size_t buffer_size) const final;
         uint8_t m_read_buffer[INTERNAL_BUFFER_SIZE];
     };
 }
