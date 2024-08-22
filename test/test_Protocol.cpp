@@ -1,3 +1,4 @@
+#include "TestHelpers.hpp"
 #include <bms_victron_smart_shunt/Protocol.hpp>
 #include <fstream>
 #include <gtest/gtest.h>
@@ -32,18 +33,7 @@ TEST_F(ProtocolTest, it_handles_a_start_byte_at_the_very_end_of_the_buffer)
 }
 TEST_F(ProtocolTest, it_accepts_a_packet_and_correctly_parse_it)
 {
-    std::ifstream file(TEST_PATH "data", std::ios::ate);
-    if (!file) {
-        std::cout << "Error opening file!" << std::endl;
-    }
-    file.seekg(0, std::ios::beg);
-    char ch;
-    std::vector<uint8_t> buffer;
-    while (file.get(ch)) {
-
-        buffer.push_back(static_cast<uint8_t>(ch));
-    }
-    file.close();
+    auto buffer = bms_victron_smart_shunt::readTextFile(TEST_PATH "data");
 
     // Checksum field addition
     std::vector<uint8_t> checksum_field =
