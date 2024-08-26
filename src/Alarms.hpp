@@ -10,14 +10,14 @@ namespace bms_victron_smart_shunt {
      *
      */
     enum Alarms {
-        LowVoltage = 1,
-        HighVoltage = 2,
-        LowStateOfCharge = 4,
-        LowStarterVoltage = 8,
-        HighStarterVoltage = 16,
-        LowTemperature = 32,
-        HighTemperature = 64,
-        MidVoltage = 128
+        LOW_VOLTAGE = 1,
+        HIGH_VOLTAGE = 2,
+        LOW_STATE_OF_CHARGE = 4,
+        LOW_STATER_VOLTAGE = 8,
+        HIGH_STATER_VOLTAGE = 16,
+        LOW_TEMPERATURE = 32,
+        HIGH_TEMPERATURE = 64,
+        MID_VOLTAGE = 128
     };
 }
 

@@ -40,7 +40,6 @@ int protocol::extractPacket(const uint8_t* buffer, int buffer_size)
         return checksum_begin_it - buffer - 2;
     }
     else {
-        // todo: check
         return -1;
     }
 }
