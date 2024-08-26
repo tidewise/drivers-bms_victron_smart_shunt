@@ -10,6 +10,7 @@ namespace bms_victron_smart_shunt {
      *
      */
     enum Alarms {
+        NORMAL_OPERATION = 0,
         LOW_VOLTAGE = 1,
         HIGH_VOLTAGE = 2,
         LOW_STATE_OF_CHARGE = 4,
