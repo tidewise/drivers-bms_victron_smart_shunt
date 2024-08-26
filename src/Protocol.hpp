@@ -7,9 +7,9 @@
 
 namespace bms_victron_smart_shunt {
     namespace protocol {
-        static constexpr uint8_t PACKET_START_MARKER = 0x0d;
-        static constexpr uint8_t LINE_DELIMITER = 0x0a;
-        static constexpr uint8_t FIELD_DELIMITER = 0x09;
+        static constexpr char PACKET_START_MARKER = 0x0d;
+        static constexpr char LINE_DELIMITER = 0x0a;
+        static constexpr char FIELD_DELIMITER = 0x09;
         static constexpr char CHECKSUM_STR[] = {'C', 'h', 'e', 'c', 'k', 's', 'u', 'm'};
         static constexpr size_t CHECKSUM_STR_LEN = sizeof(CHECKSUM_STR);
         static constexpr size_t MIN_PACKET_SIZE = 17;
