@@ -1,3 +1,4 @@
+#include "TestHelpers.hpp"
 #include <bms_victron_smart_shunt/Driver.hpp>
 #include <bms_victron_smart_shunt/Protocol.hpp>
 #include <gtest/gtest.h>
@@ -24,6 +25,11 @@ struct DriverTest : public ::testing::Test, iodrivers_base::Fixture<Driver> {
     void openDriver()
     {
         driver.openURI("test://");
+    }
+
+    void pushDataToDriver(std::vector<uint8_t> const& msg)
+    {
+        iodrivers_base::Fixture<Driver>::pushDataToDriver(msg);
     }
 
     void pushDataToDriver(char const* msg)
@@ -177,4 +183,15 @@ TEST_F(DriverTest, rejects_a_partial_packet_and_accepts_following_full_one)
     ASSERT_EQ(feedback.relay_state, "OFF");
     ASSERT_EQ(feedback.alarm_reason, 0);
     ASSERT_EQ(feedback.model_description, "700");
+}
+
+TEST_F(DriverTest, it_correctly_parses_the_MON_0_field)
+{
+    openDriver();
+    IODRIVERS_BASE_MOCK();
+    // Partial packet
+    auto buffer = readTextFile(TEST_PATH "mon_0.dat");
+    pushDataToDriver(buffer);
+    auto result = driver.processOne();
+    ASSERT_EQ(0, result.dc_monitor_mode);
 }

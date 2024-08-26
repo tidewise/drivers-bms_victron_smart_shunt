@@ -39,7 +39,6 @@ TEST_F(ProtocolTest, it_accepts_a_packet_and_correctly_parse_it)
     std::vector<uint8_t> checksum_field =
         {0x0d, 0x0a, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x73, 0x75, 0x6d, 0x09, 0xbe};
     buffer.insert(buffer.end(), checksum_field.begin(), checksum_field.end());
-
     auto feedback = parseSmartShuntFeedback(&buffer[0], 631);
     ASSERT_EQ(619, extractPacket(&buffer[0], 631));
     ASSERT_NEAR(feedback.voltage, 32.456, 1e-3);
@@ -74,5 +73,5 @@ TEST_F(ProtocolTest, it_accepts_a_packet_and_correctly_parse_it)
     ASSERT_EQ(feedback.model_description, "700");
     ASSERT_EQ(feedback.firmware_version, "040804");
     ASSERT_EQ(feedback.product_id, "0x204");
-    ASSERT_EQ(feedback.dc_monitor_mode, DCMonitorMode::ACCharger);
+    ASSERT_EQ(feedback.dc_monitor_mode, DCMonitorMode::AC_CHARGER);
 }
