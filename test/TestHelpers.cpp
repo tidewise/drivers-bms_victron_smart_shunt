@@ -6,15 +6,13 @@ using namespace bms_victron_smart_shunt;
 
 std::vector<uint8_t> bms_victron_smart_shunt::readTextFile(std::string const& file_path)
 {
-    std::ifstream file(file_path, std::ios::ate);
+    std::ifstream file(file_path);
     if (!file) {
         std::cout << "Error opening file!" << std::endl;
     }
-    file.seekg(0, std::ios::beg);
     char ch;
     std::vector<uint8_t> buffer;
     while (file.get(ch)) {
-
         buffer.push_back(static_cast<uint8_t>(ch));
     }
     file.close();

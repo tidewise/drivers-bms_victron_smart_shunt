@@ -3,7 +3,6 @@
 #include <bms_victron_smart_shunt/Protocol.hpp>
 #include <gtest/gtest.h>
 #include <iodrivers_base/FixtureGTest.hpp>
-#include <iostream>
 
 using namespace bms_victron_smart_shunt;
 using namespace std;

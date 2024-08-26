@@ -1,8 +1,6 @@
 #include "TestHelpers.hpp"
 #include <bms_victron_smart_shunt/Protocol.hpp>
-#include <fstream>
 #include <gtest/gtest.h>
-#include <iostream>
 
 using namespace bms_victron_smart_shunt;
 using namespace protocol;
