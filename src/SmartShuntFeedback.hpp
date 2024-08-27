@@ -29,7 +29,7 @@ namespace bms_victron_smart_shunt {
          * Unit: V
          *
          */
-        float auxiliary_voltage = base::unset<double>();
+        float auxiliary_starter_voltage = base::unset<double>();
         /**
          * @brief Mid-point voltage of the battery bank
          * Label: VM
@@ -141,6 +141,7 @@ namespace bms_victron_smart_shunt {
         int full_discharges_number = 0;
         /**
          * @brief Cumulative charge drawn
+         * todo name
          * Label: H6
          * Unit: Coulomb
          *
@@ -204,6 +205,7 @@ namespace bms_victron_smart_shunt {
          * Label: H17
          * Original device unit: 0.01 kWh
          * Unit: Joule
+         *
          */
         float discharged_energy = base::unset<double>();
         /**
@@ -242,6 +244,20 @@ namespace bms_victron_smart_shunt {
          *
          */
         base::Time timestamp;
+        /**
+         * @brief Minimum auxiliary (battery) voltage
+         * Unit: Volt
+         * Label: H15
+         *
+         */
+        float minimum_auxiliary_battery_voltage = base::unset<double>();
+        /**
+         * @brief Maximum auxiliary (battery) voltage
+         * Unit: Volt
+         * Label: H16
+         *
+         */
+        float maximum_auxiliary_battery_voltage = base::unset<double>();
     };
 }
 

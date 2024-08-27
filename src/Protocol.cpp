@@ -67,7 +67,7 @@ SmartShuntFeedback protocol::parseSmartShuntFeedback(uint8_t const* buffer,
             }
             else if (field == "VS") {
                 int val = stoi(value_s);
-                data.auxiliary_voltage = static_cast<float>(val) / 1000;
+                data.auxiliary_starter_voltage = static_cast<float>(val) / 1000;
             }
             else if (field == "DM") {
                 int val = stoi(value_s);
@@ -188,6 +188,14 @@ SmartShuntFeedback protocol::parseSmartShuntFeedback(uint8_t const* buffer,
                     throw invalid_argument(msg.str());
                 }
                 data.dc_monitor_mode = DCMonitorMode(val);
+            }
+            else if (field == "H15") {
+                int val = stoi(value_s);
+                data.minimum_auxiliary_battery_voltage = static_cast<float>(val) / 1000;
+            }
+            else if (field == "H16") {
+                int val = stoi(value_s);
+                data.maximum_auxiliary_battery_voltage = static_cast<float>(val) / 1000;
             }
         }
     }

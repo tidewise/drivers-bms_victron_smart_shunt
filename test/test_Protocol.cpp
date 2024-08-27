@@ -40,7 +40,7 @@ TEST_F(ProtocolTest, it_accepts_a_packet_and_correctly_parse_it)
     auto feedback = parseSmartShuntFeedback(&buffer[0], 631);
     ASSERT_EQ(619, extractPacket(&buffer[0], 631));
     ASSERT_NEAR(feedback.voltage, 32.456, 1e-3);
-    ASSERT_NEAR(feedback.auxiliary_voltage, 14.45, 1e-3);
+    ASSERT_NEAR(feedback.auxiliary_starter_voltage, 14.45, 1e-3);
     ASSERT_NEAR(feedback.mid_point_voltage, 15.5, 1e-3);
     ASSERT_NEAR(feedback.mid_point_deviation, 5, 1e-3);
     ASSERT_NEAR(feedback.current, 4.5, 1e-3);
@@ -72,4 +72,6 @@ TEST_F(ProtocolTest, it_accepts_a_packet_and_correctly_parse_it)
     ASSERT_EQ(feedback.firmware_version, "0408");
     ASSERT_EQ(feedback.product_id, "0x204");
     ASSERT_EQ(feedback.dc_monitor_mode, DCMonitorMode::AC_CHARGER);
+    ASSERT_NEAR(feedback.minimum_auxiliary_battery_voltage, 111, 1e-3);
+    ASSERT_NEAR(feedback.maximum_auxiliary_battery_voltage, 160, 1e-3);
 }
