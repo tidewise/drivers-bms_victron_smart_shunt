@@ -46,6 +46,7 @@ SmartShuntFeedback protocol::parseSmartShuntFeedback(uint8_t const* buffer,
     int buffer_size)
 {
     SmartShuntFeedback data;
+    data.timestamp = base::Time::now();
     std::string data_str(reinterpret_cast<const char*>(buffer), buffer_size);
     std::istringstream stream(data_str);
     std::string line;
@@ -56,7 +57,7 @@ SmartShuntFeedback protocol::parseSmartShuntFeedback(uint8_t const* buffer,
                 throw std::runtime_error("invalid line found " + line);
             }
             string field = line.substr(1, field_delimiter_pos - 1);
-            string value_s = line.substr(field_delimiter_pos + 1, line.size() - 1);
+            string value_s = line.substr(field_delimiter_pos + 1);
             if (field == "V") {
                 int val = stoi(value_s);
                 data.voltage = static_cast<float>(val) / 1000;
