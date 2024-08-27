@@ -220,8 +220,8 @@ namespace bms_victron_smart_shunt {
          */
         std::string model_description;
         /**
-         * @brief Firmware Version
-         * Label: FWE
+         * @brief Firmware Version (16 bit)
+         * Label: FW
          *
          */
         std::string firmware_version;

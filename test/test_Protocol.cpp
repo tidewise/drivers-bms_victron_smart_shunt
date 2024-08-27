@@ -69,7 +69,7 @@ TEST_F(ProtocolTest, it_accepts_a_packet_and_correctly_parse_it)
     ASSERT_NEAR(feedback.discharged_energy, 18000000, 1e-3);
     ASSERT_NEAR(feedback.charged_energy, 108000000, 1e-3);
     ASSERT_EQ(feedback.model_description, "700");
-    ASSERT_EQ(feedback.firmware_version, "040804");
+    ASSERT_EQ(feedback.firmware_version, "0408");
     ASSERT_EQ(feedback.product_id, "0x204");
     ASSERT_EQ(feedback.dc_monitor_mode, DCMonitorMode::AC_CHARGER);
 }

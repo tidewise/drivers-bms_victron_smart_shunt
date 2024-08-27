@@ -174,7 +174,7 @@ SmartShuntFeedback protocol::parseSmartShuntFeedback(uint8_t const* buffer,
             else if (field == "BMV") {
                 data.model_description = value_s;
             }
-            else if (field == "FWE") {
+            else if (field == "FW") {
                 data.firmware_version = value_s;
             }
             else if (field == "PID") {
