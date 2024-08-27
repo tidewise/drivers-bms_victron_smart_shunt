@@ -80,6 +80,8 @@ namespace bms_victron_smart_shunt {
         float state_of_charge = base::unset<double>();
         /**
          * @brief Time-to-go
+         * When the battery is not discharging the time- to-go is infinite. This is
+         * represented as -1.
          * Label: TTG
          *
          */
