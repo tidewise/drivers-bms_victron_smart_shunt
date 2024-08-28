@@ -48,7 +48,7 @@ TEST_F(ProtocolTest, it_accepts_a_packet_and_correctly_parse_it)
     ASSERT_NEAR(feedback.temperature.getCelsius(), 27, 1e-3);
     ASSERT_NEAR(feedback.instantaneous_power, 600, 1e-3);
     ASSERT_NEAR(feedback.consumed_charge, 54720, 1e-3);
-    ASSERT_NEAR(feedback.state_of_charge, 85, 1e-3);
+    ASSERT_NEAR(feedback.state_of_charge, 8.5, 1e-3);
     ASSERT_EQ(feedback.time_to_go.toSeconds(), 120 * 60);
     ASSERT_EQ(feedback.alarm_condition_active, "ON");
     ASSERT_EQ(feedback.relay_state, "ON");

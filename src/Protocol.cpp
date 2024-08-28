@@ -92,7 +92,7 @@ void protocol::parseSmartShuntFeedback(uint8_t const* buffer,
             }
             else if (field == "SOC") {
                 int val = stoi(value_s);
-                data.state_of_charge = val;
+                data.state_of_charge = static_cast<float>(val) / 10;
             }
             else if (field == "TTG") {
                 int val = stoi(value_s);
