@@ -30,11 +30,11 @@ int main(int argc, char const* argv[])
     driver.setWriteTimeout(base::Time::fromMilliseconds(1000));
     driver.openURI(uri);
     int poll_period_usec = 100000;
-    if (argv[2]) {
+    if (argc >= 3) {
         poll_period_usec = atof(argv[2]) * 1000000;
     }
     int needed_packets = 2;
-    if (argv[3]) {
+    if (argc >= 4) {
         needed_packets = atof(argv[3]);
     }
 
