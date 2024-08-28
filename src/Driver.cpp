@@ -14,9 +14,9 @@ int Driver::extractPacket(uint8_t const* buffer, size_t buffer_size) const
     return protocol::extractPacket(buffer, buffer_size);
 }
 
-SmartShuntFeedback Driver::processOne()
+SmartShuntFeedback Driver::processOne(int needed_packets)
 {
-    if (m_processed_packets_counter >= 2) {
+    if (m_processed_packets_counter >= needed_packets) {
         // Reset feedback
         m_feedback = SmartShuntFeedback();
         m_processed_packets_counter = 0;

@@ -9,10 +9,12 @@ using namespace bms_victron_smart_shunt;
 int usage()
 {
     cerr << "Usage: "
-         << "bms_victron_smart_shunt_ctl URI PERIOD\n"
+         << "bms_victron_smart_shunt_ctl URI PERIOD NEEDED_PACKETS \n"
          << "URI is a valid iodrivers_base URI, e.g. serial:///dev/ttyUSB0:19200\n"
          << "PERIOD is time interval in seconds between two outputs, the default value "
             "is 0.1 seconds\n"
+         << "NEEDED_PACKETS The number of packets needed to have a full feedback update\n"
+
          << flush;
     return 0;
 }
@@ -31,9 +33,13 @@ int main(int argc, char const* argv[])
     if (argv[2]) {
         poll_period_usec = atof(argv[2]) * 1000000;
     }
+    int needed_packets = 2;
+    if (argv[3]) {
+        needed_packets = atof(argv[3]);
+    }
 
     while (true) {
-        auto feedback = driver.processOne();
+        auto feedback = driver.processOne(needed_packets);
         if (driver.packetsCounter() >= 2) {
             cout << fixed << std::left << std::setw(42)
                  << "\nTimestamp: " << feedback.timestamp << std::left << std::setw(42)
