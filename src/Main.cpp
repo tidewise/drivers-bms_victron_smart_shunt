@@ -34,56 +34,60 @@ int main(int argc, char const* argv[])
 
     while (true) {
         auto feedback = driver.processOne();
-        cout << fixed << std::left << std::setw(42)
-             << "\nTimestamp: " << feedback.timestamp << std::left << std::setw(42)
-             << "\nProduct ID: " << feedback.product_id << std::left << std::setw(42)
-             << "\nVoltage: " << setprecision(3) << feedback.voltage << std::left
-             << std::setw(42) << "\nCurrent: " << feedback.current << std::left
-             << std::setw(42) << "\nInstantaneous power: " << setprecision(0)
-             << feedback.instantaneous_power << std::left << std::setw(42)
-             << "\nConsumed charge: " << setprecision(3) << feedback.consumed_charge
-             << std::left << std::setw(42) << "\nState of charge: " << setprecision(0)
-             << feedback.state_of_charge << std::left << std::setw(42)
-             << "\nTime to go (s): " << feedback.time_to_go.toSeconds() << std::left
-             << std::setw(42)
-             << "\nAlarm condition active: " << feedback.alarm_condition_active
-             << std::left << std::setw(42) << "\nAlarm reason: " << feedback.alarm_reason
-             << std::left << std::setw(42)
-             << "\nModel description: " << feedback.model_description << std::left
-             << std::setw(42) << "\nFirmware version: " << feedback.firmware_version
-             << std::left << std::setw(42)
-             << "\nDC monitor mode: " << feedback.dc_monitor_mode << std::left
-             << std::setw(42) << "\nCharged energy: " << feedback.charged_energy
-             << std::left << std::setw(42)
-             << "\nDeepest discharge depth: " << feedback.deepest_discharge_depth
-             << std::left << std::setw(42)
-             << "\nLast discharge depth: " << feedback.last_discharge_depth << std::left
-             << std::setw(42)
-             << "\nAverage discharge depth: " << feedback.average_discharge_depth
-             << std::left << std::setw(42)
-             << "\nCharge cycles number: " << feedback.charge_cycles_number << std::left
-             << std::setw(42)
-             << "\nFull discharges number: " << feedback.full_discharges_number
-             << std::left << std::setw(42)
-             << "\nCumulative charge drawn: " << feedback.cumulative_charge_drawn
-             << std::left << std::setw(42) << "\nMinimum voltage: " << setprecision(3)
-             << feedback.minimum_voltage << std::left << std::setw(42)
-             << "\nMaximum voltage: " << feedback.maximum_voltage << std::left
-             << std::setw(42) << "\nSeconds since last full charge: " << setprecision(0)
-             << feedback.seconds_since_last_full_charge.toSeconds() << std::left
-             << std::setw(42) << "\nNumber of automatic synchronizations: "
-             << feedback.automatic_synchronizations_number << std::left << std::setw(42)
-             << "\nNumber of low voltage alarms: " << feedback.low_voltage_alarms_number
-             << std::left << std::setw(42)
-             << "\nNumber of high voltage alarms: " << feedback.high_voltage_alarms_number
-             << std::left << std::setw(42)
-             << "\nMinimum auxiliary battery voltage: " << setprecision(3)
-             << feedback.minimum_auxiliary_battery_voltage << std::left << std::setw(42)
-             << "\nMaximum auxiliary battery voltage: "
-             << feedback.maximum_auxiliary_battery_voltage << std::left << std::setw(42)
-             << "\nDischarged energy: " << setprecision(0) << feedback.discharged_energy
-             << std::left << std::setw(42)
-             << "\nCharged energy: " << feedback.charged_energy << endl;
+        if (driver.packetsCounter() >= 2) {
+            cout << fixed << std::left << std::setw(42)
+                 << "\nTimestamp: " << feedback.timestamp << std::left << std::setw(42)
+                 << "\nProduct ID: " << feedback.product_id << std::left << std::setw(42)
+                 << "\nVoltage: " << setprecision(3) << feedback.voltage << std::left
+                 << std::setw(42) << "\nCurrent: " << feedback.current << std::left
+                 << std::setw(42) << "\nInstantaneous power: " << setprecision(0)
+                 << feedback.instantaneous_power << std::left << std::setw(42)
+                 << "\nConsumed charge: " << setprecision(3) << feedback.consumed_charge
+                 << std::left << std::setw(42) << "\nState of charge: " << setprecision(0)
+                 << feedback.state_of_charge << std::left << std::setw(42)
+                 << "\nTime to go (s): " << feedback.time_to_go.toSeconds() << std::left
+                 << std::setw(42)
+                 << "\nAlarm condition active: " << feedback.alarm_condition_active
+                 << std::left << std::setw(42)
+                 << "\nAlarm reason: " << feedback.alarm_reason << std::left
+                 << std::setw(42) << "\nModel description: " << feedback.model_description
+                 << std::left << std::setw(42)
+                 << "\nFirmware version: " << feedback.firmware_version << std::left
+                 << std::setw(42) << "\nDC monitor mode: " << feedback.dc_monitor_mode
+                 << std::left << std::setw(42)
+                 << "\nCharged energy: " << feedback.charged_energy << std::left
+                 << std::setw(42)
+                 << "\nDeepest discharge depth: " << feedback.deepest_discharge_depth
+                 << std::left << std::setw(42)
+                 << "\nLast discharge depth: " << feedback.last_discharge_depth
+                 << std::left << std::setw(42)
+                 << "\nAverage discharge depth: " << feedback.average_discharge_depth
+                 << std::left << std::setw(42)
+                 << "\nCharge cycles number: " << feedback.charge_cycles_number
+                 << std::left << std::setw(42)
+                 << "\nFull discharges number: " << feedback.full_discharges_number
+                 << std::left << std::setw(42)
+                 << "\nCumulative charge drawn: " << feedback.cumulative_charge_drawn
+                 << std::left << std::setw(42) << "\nMinimum voltage: " << setprecision(3)
+                 << feedback.minimum_voltage << std::left << std::setw(42)
+                 << "\nMaximum voltage: " << feedback.maximum_voltage << std::left
+                 << std::setw(42)
+                 << "\nSeconds since last full charge: " << setprecision(0)
+                 << feedback.seconds_since_last_full_charge.toSeconds() << std::left
+                 << std::setw(42) << "\nNumber of automatic synchronizations: "
+                 << feedback.automatic_synchronizations_number << std::left
+                 << std::setw(42) << "\nNumber of low voltage alarms: "
+                 << feedback.low_voltage_alarms_number << std::left << std::setw(42)
+                 << "\nNumber of high voltage alarms: "
+                 << feedback.high_voltage_alarms_number << std::left << std::setw(42)
+                 << "\nMinimum auxiliary battery voltage: " << setprecision(3)
+                 << feedback.minimum_auxiliary_battery_voltage << std::left
+                 << std::setw(42) << "\nMaximum auxiliary battery voltage: "
+                 << feedback.maximum_auxiliary_battery_voltage << std::left
+                 << std::setw(42) << "\nDischarged energy: " << setprecision(0)
+                 << feedback.discharged_energy << std::left << std::setw(42)
+                 << "\nCharged energy: " << feedback.charged_energy << endl;
+        }
         usleep(poll_period_usec);
     }
 }

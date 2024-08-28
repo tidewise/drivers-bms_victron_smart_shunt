@@ -194,3 +194,21 @@ TEST_F(DriverTest, it_correctly_parses_the_MON_0_field)
     auto result = driver.processOne();
     ASSERT_EQ(0, result.dc_monitor_mode);
 }
+
+TEST_F(DriverTest, it_updates_the_processed_packet_counter)
+{
+    openDriver();
+    IODRIVERS_BASE_MOCK();
+    // Partial packet
+    auto buffer = readTextFile(TEST_PATH "mon_0.dat");
+    pushDataToDriver(buffer);
+    ASSERT_EQ(0, driver.packetsCounter());
+    auto result = driver.processOne();
+    ASSERT_EQ(1, driver.packetsCounter());
+    pushDataToDriver(buffer);
+    result = driver.processOne();
+    ASSERT_EQ(2, driver.packetsCounter());
+    pushDataToDriver(buffer);
+    result = driver.processOne();
+    ASSERT_EQ(1, driver.packetsCounter());
+}

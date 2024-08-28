@@ -26,8 +26,9 @@ namespace bms_victron_smart_shunt {
          * @param buffer_size The buffer size
          * @return SmartShuntFeedback
          */
-        SmartShuntFeedback parseSmartShuntFeedback(uint8_t const* buffer,
-            int buffer_size);
+        void parseSmartShuntFeedback(uint8_t const* buffer,
+            int buffer_size,
+            SmartShuntFeedback& feedback);
     }
 }
 

@@ -42,13 +42,13 @@ int protocol::extractPacket(const uint8_t* buffer, int buffer_size)
     }
 }
 
-SmartShuntFeedback protocol::parseSmartShuntFeedback(uint8_t const* buffer,
-    int buffer_size)
+void protocol::parseSmartShuntFeedback(uint8_t const* buffer,
+    int buffer_size,
+    SmartShuntFeedback& data)
 {
-    SmartShuntFeedback data;
     data.timestamp = base::Time::now();
-    std::string data_str(reinterpret_cast<const char*>(buffer), buffer_size);
-    std::istringstream stream(data_str);
+    std::string feedback_str(reinterpret_cast<const char*>(buffer), buffer_size);
+    std::istringstream stream(feedback_str);
     std::string line;
     while (std::getline(stream, line, PACKET_START_MARKER)) {
         if (!line.empty()) {
@@ -200,5 +200,4 @@ SmartShuntFeedback protocol::parseSmartShuntFeedback(uint8_t const* buffer,
             }
         }
     }
-    return data;
 }
