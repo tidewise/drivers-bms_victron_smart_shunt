@@ -37,7 +37,8 @@ TEST_F(ProtocolTest, it_accepts_a_packet_and_correctly_parse_it)
     std::vector<uint8_t> checksum_field =
         {0x0d, 0x0a, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x73, 0x75, 0x6d, 0x09, 0xbe};
     buffer.insert(buffer.end(), checksum_field.begin(), checksum_field.end());
-    auto feedback = parseSmartShuntFeedback(&buffer[0], 631);
+    SmartShuntFeedback feedback;
+    parseSmartShuntFeedback(&buffer[0], 631, feedback);
     ASSERT_EQ(619, extractPacket(&buffer[0], 631));
     ASSERT_NEAR(feedback.voltage, 32.456, 1e-3);
     ASSERT_NEAR(feedback.auxiliary_starter_voltage, 14.45, 1e-3);
@@ -47,7 +48,7 @@ TEST_F(ProtocolTest, it_accepts_a_packet_and_correctly_parse_it)
     ASSERT_NEAR(feedback.temperature.getCelsius(), 27, 1e-3);
     ASSERT_NEAR(feedback.instantaneous_power, 600, 1e-3);
     ASSERT_NEAR(feedback.consumed_charge, 54720, 1e-3);
-    ASSERT_NEAR(feedback.state_of_charge, 85, 1e-3);
+    ASSERT_NEAR(feedback.state_of_charge, 8.5, 1e-3);
     ASSERT_EQ(feedback.time_to_go.toSeconds(), 120 * 60);
     ASSERT_EQ(feedback.alarm_condition_active, "ON");
     ASSERT_EQ(feedback.relay_state, "ON");

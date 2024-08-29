@@ -53,13 +53,13 @@ TEST_F(DriverTest, it_accepts_a_full_packet)
                       "\x33\x30\x37\x0d\x0a\x43\x68\x65\x63\x6b\x73\x75\x6d\x09"
                       "\xd8";
     pushDataToDriver(msg);
-    auto feedback = driver.processOne();
+    auto feedback = driver.processOne(2);
     ASSERT_EQ(feedback.product_id, "0x203");
     ASSERT_NEAR(feedback.voltage, 26.201, 1e-3);
     ASSERT_EQ(feedback.current, 0);
     ASSERT_NEAR(feedback.instantaneous_power, 0, 1e-3);
     ASSERT_EQ(feedback.consumed_charge, 0);
-    ASSERT_NEAR(feedback.state_of_charge, 1000, 1e-3);
+    ASSERT_NEAR(feedback.state_of_charge, 100, 1e-3);
     ASSERT_EQ(feedback.time_to_go.toSeconds(), -60);
     ASSERT_EQ(feedback.alarm_condition_active, "OFF");
     ASSERT_EQ(feedback.relay_state, "OFF");
@@ -81,7 +81,7 @@ TEST_F(DriverTest, it_rejects_a_packet_because_the_checksum_is_wrong)
                       "\x33\x30\x37\x0d\x0a\x43\x68\x65\x63\x6b\x73\x75\x6d\x09"
                       "\xd7";
     pushDataToDriver(msg);
-    ASSERT_THROW_MESSAGE(driver.processOne(),
+    ASSERT_THROW_MESSAGE(driver.processOne(2),
         std::runtime_error,
         "readPacket(): no data to read while a packet_timeout of 0 was given");
 }
@@ -98,18 +98,18 @@ TEST_F(DriverTest, the_packet_arrives_little_by_little)
                       "\x6c\x61\x79\x09\x4f\x46\x46\x0d\x0a\x41\x52\x09\x30\x0d"
                       "\x0a\x42\x4d\x56\x09\x37\x30\x30\x0d\x0a\x46\x57\x09\x30";
     pushDataToDriver(msg);
-    ASSERT_THROW_MESSAGE(driver.processOne(),
+    ASSERT_THROW_MESSAGE(driver.processOne(2),
         std::runtime_error,
         "readPacket(): no data to read while a packet_timeout of 0 was given");
     msg = "\x33\x30\x37\x0d\x0a\x43\x68\x65\x63\x6b\x73\x75\x6d\x09\xd8";
     pushDataToDriver(msg);
-    auto feedback = driver.processOne();
+    auto feedback = driver.processOne(2);
     ASSERT_EQ(feedback.product_id, "0x203");
     ASSERT_NEAR(feedback.voltage, 26.201, 1e-3);
     ASSERT_EQ(feedback.current, 0);
     ASSERT_NEAR(feedback.instantaneous_power, 0, 1e-3);
     ASSERT_EQ(feedback.consumed_charge, 0);
-    ASSERT_NEAR(feedback.state_of_charge, 1000, 1e-3);
+    ASSERT_NEAR(feedback.state_of_charge, 100, 1e-3);
     ASSERT_EQ(feedback.time_to_go.toSeconds(), -60);
     ASSERT_EQ(feedback.alarm_condition_active, "OFF");
     ASSERT_EQ(feedback.relay_state, "OFF");
@@ -132,13 +132,13 @@ TEST_F(DriverTest, it_accepts_a_packet_with_garbage_at_the_beginning)
         "\x0a\x42\x4d\x56\x09\x37\x30\x30\x0d\x0a\x46\x57\x09\x30\x33\x30\x37\x0d\x0a\x43"
         "\x68\x65\x63\x6b\x73\x75\x6d\x09\xd8";
     pushDataToDriver(msg);
-    auto feedback = driver.processOne();
+    auto feedback = driver.processOne(2);
     ASSERT_EQ(feedback.product_id, "0x203");
     ASSERT_NEAR(feedback.voltage, 26.201, 1e-3);
     ASSERT_EQ(feedback.current, 0);
     ASSERT_NEAR(feedback.instantaneous_power, 0, 1e-3);
     ASSERT_EQ(feedback.consumed_charge, 0);
-    ASSERT_NEAR(feedback.state_of_charge, 1000, 1e-3);
+    ASSERT_NEAR(feedback.state_of_charge, 100, 1e-3);
     ASSERT_EQ(feedback.time_to_go.toSeconds(), -60);
     ASSERT_EQ(feedback.alarm_condition_active, "OFF");
     ASSERT_EQ(feedback.relay_state, "OFF");
@@ -156,7 +156,7 @@ TEST_F(DriverTest, rejects_a_partial_packet_and_accepts_following_full_one)
                       "\x33\x30\x37\x0d\x0a\x43\x68\x65\x63\x6b\x73\x75\x6d\x09"
                       "\xd8";
     pushDataToDriver(msg);
-    ASSERT_THROW_MESSAGE(driver.processOne(),
+    ASSERT_THROW_MESSAGE(driver.processOne(2),
         std::runtime_error,
         "readPacket(): no data to read while a packet_timeout of 0 was given");
     // Full packet
@@ -170,13 +170,13 @@ TEST_F(DriverTest, rejects_a_partial_packet_and_accepts_following_full_one)
           "\x33\x30\x37\x0d\x0a\x43\x68\x65\x63\x6b\x73\x75\x6d\x09"
           "\xd8";
     pushDataToDriver(msg);
-    auto feedback = driver.processOne();
+    auto feedback = driver.processOne(2);
     ASSERT_EQ(feedback.product_id, "0x203");
     ASSERT_NEAR(feedback.voltage, 26.201, 1e-3);
     ASSERT_EQ(feedback.current, 0);
     ASSERT_NEAR(feedback.instantaneous_power, 0, 1e-3);
     ASSERT_EQ(feedback.consumed_charge, 0);
-    ASSERT_NEAR(feedback.state_of_charge, 1000, 1e-3);
+    ASSERT_NEAR(feedback.state_of_charge, 100, 1e-3);
     ASSERT_EQ(feedback.time_to_go.toSeconds(), -60);
     ASSERT_EQ(feedback.alarm_condition_active, "OFF");
     ASSERT_EQ(feedback.relay_state, "OFF");
@@ -191,6 +191,24 @@ TEST_F(DriverTest, it_correctly_parses_the_MON_0_field)
     // Partial packet
     auto buffer = readTextFile(TEST_PATH "mon_0.dat");
     pushDataToDriver(buffer);
-    auto result = driver.processOne();
+    auto result = driver.processOne(2);
     ASSERT_EQ(0, result.dc_monitor_mode);
+}
+
+TEST_F(DriverTest, it_updates_the_processed_packet_counter)
+{
+    openDriver();
+    IODRIVERS_BASE_MOCK();
+    // Partial packet
+    auto buffer = readTextFile(TEST_PATH "mon_0.dat");
+    pushDataToDriver(buffer);
+    ASSERT_EQ(0, driver.packetsCounter());
+    auto result = driver.processOne(2);
+    ASSERT_EQ(1, driver.packetsCounter());
+    pushDataToDriver(buffer);
+    result = driver.processOne(2);
+    ASSERT_EQ(2, driver.packetsCounter());
+    pushDataToDriver(buffer);
+    result = driver.processOne(2);
+    ASSERT_EQ(1, driver.packetsCounter());
 }
