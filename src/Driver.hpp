@@ -20,18 +20,9 @@ namespace bms_victron_smart_shunt {
         /**
          * @brief Process the internal buffer and parses the a found packet
          *
-         * @param needed_packets The number of needed packets to compose a full feedback
-         * update
          * @return SmartShuntFeedback
          */
-        SmartShuntFeedback processOne(int needed_packets);
-        /**
-         * @brief Returns the number of packets processed to compose the current feedback
-         * struct
-         *
-         * @return int
-         */
-        int packetsCounter();
+        SmartShuntFeedback processOne();
 
     private:
         /**
@@ -52,12 +43,6 @@ namespace bms_victron_smart_shunt {
          *
          */
         SmartShuntFeedback m_feedback;
-        /**
-         * @brief The number of processed packets used to compose the current feedback
-         * struct
-         *
-         */
-        int m_processed_packets_counter = 0;
     };
 }
 
