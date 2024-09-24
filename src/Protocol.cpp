@@ -34,8 +34,7 @@ int protocol::extractPacket(const uint8_t* buffer, int buffer_size)
         checksum = (checksum + buffer[i]) & 255;
     }
     if (checksum == 0) {
-        // Returns the packet size without the checksum field
-        return checksum_begin_it - buffer - 2;
+        return packet_size;
     }
     else {
         return -1;
