@@ -194,3 +194,18 @@ TEST_F(DriverTest, it_correctly_parses_the_MON_0_field)
     auto result = driver.processOne();
     ASSERT_EQ(0, result.dc_monitor_mode);
 }
+
+TEST_F(DriverTest, it_does_not_increase_bad_rx_number_for_valid_packets_processing)
+{
+    openDriver();
+    IODRIVERS_BASE_MOCK();
+    auto buffer = readTextFile(TEST_PATH "mon_0.dat");
+    pushDataToDriver(buffer);
+    auto result = driver.processOne();
+    auto stats = driver.getStats();
+    ASSERT_EQ(0, result.dc_monitor_mode);
+    pushDataToDriver(buffer);
+    result = driver.processOne();
+    stats = driver.getStats();
+    ASSERT_EQ(0, stats.bad_rx);
+}
