@@ -28,6 +28,10 @@ int protocol::extractPacket(const uint8_t* buffer, int buffer_size)
         return 0;
     }
     int packet_size = checksum_begin_it - buffer + CHECKSUM_STR_LEN + 2;
+    if (buffer_size < packet_size) {
+        // There is checksum, but not its value yet, wait for more bytes
+        return 0;
+    }
     int checksum = 0;
     for (int i = 0; i < packet_size; i++) {
         // Take modulo 256 in account
