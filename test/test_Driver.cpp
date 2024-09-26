@@ -209,3 +209,26 @@ TEST_F(DriverTest, it_does_not_increase_bad_rx_number_for_valid_packets_processi
     stats = driver.getStats();
     ASSERT_EQ(0, stats.bad_rx);
 }
+
+TEST_F(DriverTest, it_accepts_a_packet_receiving_byte_by_byte)
+{
+    openDriver();
+    IODRIVERS_BASE_MOCK();
+    // Partial packet
+    auto buffer = readTextFile(TEST_PATH "mon_0.dat");
+    driver.setReadTimeout(base::Time());
+    SmartShuntFeedback feedback;
+    for (unsigned int i = 0; i < buffer.size(); ++i) {
+        std::vector<uint8_t> fragment = {buffer[i]};
+        pushDataToDriver(fragment);
+        try {
+            feedback = driver.processOne();
+        }
+        catch (iodrivers_base::TimeoutError) {
+            continue;
+        }
+    }
+    auto stats = driver.getStats();
+    ASSERT_EQ(0, stats.bad_rx);
+    ASSERT_NEAR(feedback.voltage, 13.771, 1e-3);
+}
